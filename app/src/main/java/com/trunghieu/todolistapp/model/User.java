@@ -1,13 +1,16 @@
-package com.trunghieu.todolistapp.data;
+package com.trunghieu.todolistapp.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
 
 @Entity(tableName = "User")
-public class User {
+public class User implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
-
     private String name;
     private String email;
     private String password;
@@ -21,6 +24,35 @@ public class User {
         this.role = 2;
 
     }
+
+    public User(int id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
+
+    public User(int id, String name, String email, String password, int role) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+    public User(String userEmail, String name, String email, String password, int role) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
+    public User(String name, String email, String password, int role) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
+
     public int getId() {
         return id;
     }

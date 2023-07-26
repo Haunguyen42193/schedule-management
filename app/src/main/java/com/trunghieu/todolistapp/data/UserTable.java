@@ -1,5 +1,7 @@
 package com.trunghieu.todolistapp.data;
 
+import com.trunghieu.todolistapp.data.RoleTable;
+
 public class UserTable {
     public static final String TABLE_NAME = "User";
     public static final String COLUMN_ID = "id";
@@ -18,4 +20,7 @@ public class UserTable {
             RoleTable.COLUMN_ID + "(" +  RoleTable.COLUMN_ID + "))";
 
     public static final String DROP_TABLE_QUERY = "DROP TABLE IF EXISTS " + TABLE_NAME;
+
+    public static final  String SELECT_TABLE_QUERY ="SELECT * FROM "+ TABLE_NAME +" ORDER BY "+
+            COLUMN_ID  ;
 }

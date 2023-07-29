@@ -1,7 +1,5 @@
 package com.trunghieu.todolistapp.data;
 
-import com.trunghieu.todolistapp.data.RoleTable;
-
 public class UserTable {
     public static final String TABLE_NAME = "User";
     public static final String COLUMN_ID = "id";

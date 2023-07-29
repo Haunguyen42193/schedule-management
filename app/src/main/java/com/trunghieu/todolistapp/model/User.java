@@ -1,8 +1,6 @@
 package com.trunghieu.todolistapp.model;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import java.io.Serializable;
 

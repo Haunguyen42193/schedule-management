@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.trunghieu.todolistapp.data.DBHelper;
 import com.trunghieu.todolistapp.databinding.ActivityLoginBinding;
+import com.trunghieu.todolistapp.model.User;
 
 
 public class Login extends AppCompatActivity {
@@ -23,7 +24,7 @@ public class Login extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        dbHelper = new DBHelper(this); // Khởi tạo đối tượng DBHelper
+        dbHelper = new DBHelper(this);
 
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,10 +35,19 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
                 } else {
                     Boolean checking = dbHelper.checkEmailPassword(email, pass);
-                    if (checking == true) {
-                        Toast.makeText(Login.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
+                    if (checking) {
+                        User user = dbHelper.getUserByEmail(email);
+                        if (user.getRole() == 1) {
+                            // Nếu role là 1 (Admin), chuyển đến AdminManageActivity
+                            Toast.makeText(Login.this, "Login successful as Admin!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), ListUserActivity.class);
+                            startActivity(intent);
+                        } else {
+                            // Nếu role không phải là 1 (User), chuyển đến MainActivity
+                            Toast.makeText(Login.this, "Login successful as User!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        }
                     } else {
                         Toast.makeText(Login.this, "Invalid Email or Password", Toast.LENGTH_SHORT).show();
                     }
@@ -45,6 +55,5 @@ public class Login extends AppCompatActivity {
             }
         });
     }
-
     }
 

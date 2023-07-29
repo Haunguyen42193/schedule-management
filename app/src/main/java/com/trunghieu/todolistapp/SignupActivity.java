@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 
 import com.trunghieu.todolistapp.data.DBHelper;
-import com.trunghieu.todolistapp.data.User;
+import com.trunghieu.todolistapp.model.User;
 import com.trunghieu.todolistapp.databinding.ActivitySignupBinding;
 
 

@@ -2,7 +2,6 @@ package com.trunghieu.todolistapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -13,8 +12,7 @@ import android.widget.Toast;
 import com.trunghieu.todolistapp.data.DBHelper;
 import com.trunghieu.todolistapp.model.User;
 
-import java.util.ArrayList;
-    public class DetailUserActivity extends AppCompatActivity {
+public class DetailUserActivity extends AppCompatActivity {
         EditText edtName, edtEmail, edtPass, edtRole;
         DBHelper dbHelper;
         String userEmail;

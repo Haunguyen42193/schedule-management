@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.trunghieu.todolistapp.model.Task;
 import com.trunghieu.todolistapp.model.User;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(UserTable.CREATE_TABLE_QUERY);
         db.execSQL(RoleTable.CREATE_TABLE_QUERY);
-
+        db.execSQL(TaskTable.CREATE_TABLE_TASK);
         insertRoles(db);
         isDatabaseCreated = true;
     }
@@ -29,6 +30,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(UserTable.DROP_TABLE_QUERY);
         db.execSQL(RoleTable.DROP_TABLE_QUERY);
+        db.execSQL(TaskTable.DROP_TABLE_TASK);
         onCreate(db);
     }
     private void insertRoles(SQLiteDatabase db) {
@@ -56,6 +58,21 @@ public class DBHelper extends SQLiteOpenHelper {
         return result != -1;
 
     }
+
+    public boolean insertTask(Task t) {
+        SQLiteDatabase db = getWritableDatabase();
+        //Chuẩn bị dữ liệu để thêm vào bảng
+        ContentValues values = new ContentValues();
+        values.put(TaskTable.COLUMN_TASK_TITLE, t.getTitle());
+        values.put(TaskTable.COLUMN_DESCRIPTION, t.getDescription());
+        values.put(TaskTable.COLUMN_CREATED, t.getCreateDate());
+        values.put(TaskTable.COLUMN_COMPLETE, t.getCompleted());
+        values.put(TaskTable.COLUMN_USER, t.getUserId());
+        long rs = db.insert(TaskTable.TABLE_TASKS, null, values);
+        db.close();
+        return rs != -1;
+    }
+
     public boolean checkEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + UserTable.TABLE_NAME + " WHERE " + UserTable.COLUMN_EMAIL + " = ?";

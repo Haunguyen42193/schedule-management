@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.trunghieu.todolistapp.data.DBHelper;
+import com.trunghieu.todolistapp.model.Category;
 import com.trunghieu.todolistapp.model.Task;
 
 
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dbHelper = new DBHelper(this);
-        dbHelper.insertTask(new Task("Hau", "Nguyen", "Van", "2002", 1));
+        dbHelper.insertTask(new Task("Hau1", "Nguyen", "Van2", "2002", 1));
         btnLogin = findViewById(R.id.btn_main_login);
         btnSignup = findViewById(R.id.btn_main_signup);
 

@@ -6,6 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.trunghieu.todolistapp.model.Category;
+import com.trunghieu.todolistapp.model.Notification;
 import com.trunghieu.todolistapp.model.Task;
 import com.trunghieu.todolistapp.model.User;
 
@@ -23,6 +25,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(UserTable.CREATE_TABLE_QUERY);
         db.execSQL(RoleTable.CREATE_TABLE_QUERY);
         db.execSQL(TaskTable.CREATE_TABLE_TASK);
+        db.execSQL(CategoryTable.CREATE_TABLE_CATEGORIES);
+        db.execSQL(NotificationTable.CREATE_TABLE_NOTIFICATION);
         insertRoles(db);
         isDatabaseCreated = true;
     }
@@ -31,6 +35,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(UserTable.DROP_TABLE_QUERY);
         db.execSQL(RoleTable.DROP_TABLE_QUERY);
         db.execSQL(TaskTable.DROP_TABLE_TASK);
+        db.execSQL(CategoryTable.DROP_TABLE_CATEGORIES);
+        db.execSQL(NotificationTable.DROP_TABLE_NOTIFICATION);
         onCreate(db);
     }
     private void insertRoles(SQLiteDatabase db) {
@@ -63,6 +69,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         //Chuẩn bị dữ liệu để thêm vào bảng
         ContentValues values = new ContentValues();
+        values.put(TaskTable.COLUMN_ID, t.getId());
         values.put(TaskTable.COLUMN_TASK_TITLE, t.getTitle());
         values.put(TaskTable.COLUMN_DESCRIPTION, t.getDescription());
         values.put(TaskTable.COLUMN_CREATED, t.getCreateDate());
@@ -72,7 +79,26 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return rs != -1;
     }
-
+    public boolean insertCategory(Category t) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(CategoryTable.COLUMN_ID, t.getId());
+        values.put(CategoryTable.COLUMN_NAME, t.getName());
+        values.put(CategoryTable.COLUMN_TASK_ID, t.getTaskId());
+        long rs = db.insert(CategoryTable.TABLE_CATEGORIES, null, values);
+        db.close();
+        return rs != -1;
+    }
+    public boolean insertNotification(Notification t) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(NotificationTable.COLUMN_ID, t.getId());
+        values.put(NotificationTable.COLUMN_CONTENT, t.getContent());
+        values.put(NotificationTable.COLUMN_TASK_ID, t.getTaskId());
+        long rs = db.insert(NotificationTable.TABLE_NOTIFICATION, null, values);
+        db.close();
+        return rs != -1;
+    }
     public boolean checkEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + UserTable.TABLE_NAME + " WHERE " + UserTable.COLUMN_EMAIL + " = ?";

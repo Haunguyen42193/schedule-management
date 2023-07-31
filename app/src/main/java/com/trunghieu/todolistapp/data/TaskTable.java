@@ -3,11 +3,11 @@ package com.trunghieu.todolistapp.data;
 import static com.trunghieu.todolistapp.data.UserTable.TABLE_NAME;
 
 public class TaskTable {
-    public static final String TABLE_TASKS = "Task";
+    public static final String TABLE_TASKS = "Tasks";
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_TASK_TITLE = "title";
     public static final String COLUMN_DESCRIPTION = "description";
-    public static final String COLUMN_CREATED = "created_task";
+    public static final String COLUMN_CREATED = "createdTask";
     public static final String COLUMN_COMPLETE = "completed";
     public static final String COLUMN_USER = "userId";
     public static String CREATE_TABLE_TASK =

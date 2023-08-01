@@ -20,10 +20,11 @@ public class TaskTable {
             + COLUMN_CREATED + " TEXT NOT NULL, "
             + COLUMN_COMPLETE + " TEXT, "
             + COLUMN_USER + " INTEGER, "
+            + COLUMN_CATEGORY + " TEXT, "
             + "FOREIGN KEY (" + COLUMN_USER + ") REFERENCES "
             + TABLE_NAME + "(" + RoleTable.COLUMN_ID +"), "
             + "FOREIGN KEY (" + COLUMN_CATEGORY + ") REFERENCES "
-            + CategoryTable.TABLE_NAME + "(" + RoleTable.COLUMN_ID +"))";
+            + CategoryTable.TABLE_NAME + "(" + CategoryTable.COLUMN_ID +"))";
 
     public static String DROP_TABLE_TASK =
             "DROP TABLE IF EXISTS " + TABLE_TASKS;

@@ -80,6 +80,24 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return rs != -1;
     }
+
+    public ArrayList<Task> getTaskData() {
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery(TaskTable.SELECT_TASK,null);
+        ArrayList<Task> listTask = new ArrayList<>();
+        while(cursor.moveToNext()) {
+            String id = cursor.getString(0);
+            String title = cursor.getString(1);
+            String description = cursor.getString(2);
+            String create = cursor.getString(3);
+            String complete = cursor.getString(4);
+            int userId = cursor.getInt(5);
+            String categoriId = cursor.getString(6);
+            Task task = new Task(id, title, description, create, complete, userId, categoriId);
+            listTask.add(task);
+        }
+        return listTask;
+    }
     public boolean insertCategory(Category t) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();

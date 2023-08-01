@@ -15,7 +15,7 @@ public class UserTable {
             COLUMN_PASSWORD + " TEXT, " +
             COLUMN_ROLE  + " INTEGER," +
             "FOREIGN KEY (" + COLUMN_ROLE  + ") REFERENCES " +
-            RoleTable.COLUMN_ID + "(" +  RoleTable.COLUMN_ID + "))";
+            RoleTable.TABLE_NAME + "(" +  RoleTable.COLUMN_ID + "))";
 
     public static final String DROP_TABLE_QUERY = "DROP TABLE IF EXISTS " + TABLE_NAME;
 

@@ -10,12 +10,12 @@ public class Category {
     @PrimaryKey
     private String id;
     private String name;
-    private String taskId;
+    private String description;
 
-    public Category(String name, String taskId) {
+    public Category(String name, String description) {
         this.id = UUID.randomUUID().toString();
         this.name = name;
-        this.taskId = taskId;
+        this.description = description;
     }
 
     public String getId() {
@@ -26,15 +26,15 @@ public class Category {
         return name;
     }
 
-    public String getTaskId() {
-        return taskId;
+    public String getdescription() {
+        return description;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setTaskId(String taskId) {
-        this.taskId = taskId;
+    public void setdescription(String taskId) {
+        this.description = taskId;
     }
 }

@@ -9,7 +9,7 @@
     tools:context=".ListTaskActivity">
 
     <LinearLayout
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="657dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"

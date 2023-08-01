@@ -40,7 +40,7 @@ public class Login extends AppCompatActivity {
                         if (user.getRole() == 1) {
                             // Nếu role là 1 (Admin), chuyển đến AdminManageActivity
                             Toast.makeText(Login.this, "Login successful as Admin!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), ListCategoryActivity.class);
                             Bundle bundle = new Bundle();
                             bundle.putString("UserName", user.getName());
                             intent.putExtras(bundle);
@@ -48,7 +48,7 @@ public class Login extends AppCompatActivity {
                         } else {
                             // Nếu role không phải là 1 (User), chuyển đến MainActivity
                             Toast.makeText(Login.this, "Login successful as User!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), ListUserActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), ListCategoryActivity.class);
                             startActivity(intent);
                         }
                     } else {

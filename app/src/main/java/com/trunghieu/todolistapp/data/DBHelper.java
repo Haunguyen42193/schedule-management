@@ -64,6 +64,19 @@ public class DBHelper extends SQLiteOpenHelper {
         return result != -1;
 
     }
+    public ArrayList<User> getUserData() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<User> arrayList = new ArrayList<>();
+        Cursor cursor = db.rawQuery(UserTable.SELECT_TABLE_QUERY, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(0);
+            String name = cursor.getString(1);
+            String email = cursor.getString(2);
+            User user = new User(id, name, email);
+            arrayList.add(user);
+        }
+        return arrayList;
+    }
 
     public boolean insertTask(Task t) {
         SQLiteDatabase db = getWritableDatabase();
@@ -108,6 +121,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return rs != -1;
     }
+
+
     public boolean insertNotification(Notification t) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -118,6 +133,13 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return rs != -1;
     }
+
+
+
+
+
+
+
     public boolean checkEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + UserTable.TABLE_NAME + " WHERE " + UserTable.COLUMN_EMAIL + " = ?";
@@ -134,19 +156,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         return emailPasswordMatch;
     }
-    public ArrayList<User> getUserData() {
-        SQLiteDatabase db = this.getReadableDatabase();
-        ArrayList<User> arrayList = new ArrayList<>();
-        Cursor cursor = db.rawQuery(UserTable.SELECT_TABLE_QUERY, null);
-        while (cursor.moveToNext()) {
-            int id = cursor.getInt(0);
-            String name = cursor.getString(1);
-            String email = cursor.getString(2);
-            User user = new User(id, name, email);
-            arrayList.add(user);
-        }
-        return arrayList;
-    }
+
     public User getUserByEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         User user = null;

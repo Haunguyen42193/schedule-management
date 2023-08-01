@@ -26,12 +26,13 @@ public class ListUserActivity extends AppCompatActivity {
     UserAdapter adapter;
     private FloatingActionButton addButton;
     private ArrayList<User> originalList;
-
+    androidx.appcompat.widget.SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_user);
+        searchView = findViewById(R.id.search_user);
         dbHelper = new DBHelper(this);
         recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -50,7 +51,7 @@ public class ListUserActivity extends AppCompatActivity {
             }
         });
 
-        androidx.appcompat.widget.SearchView searchView = findViewById(R.id.search_user);
+
         searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

@@ -7,8 +7,9 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="355dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
 
         <TableRow
             android:layout_width="match_parent"
@@ -25,7 +26,7 @@
 
             <TextView
                 android:id="@+id/txtTaskItemTitleAdmin"
-                android:layout_width="303dp"
+                android:layout_width="255dp"
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 android:textSize="20sp" />

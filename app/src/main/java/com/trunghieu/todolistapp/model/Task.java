@@ -26,6 +26,16 @@ public class Task {
         this.categoryID = categoryID;
     }
 
+    public Task(String id, String title, String description, String createDate, String completed, int userId, String categoryID) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.createDate = createDate;
+        this.completed = completed;
+        this.userId = userId;
+        this.categoryID = categoryID;
+    }
+
     public String getId() {
         return id;
     }

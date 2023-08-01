@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/txtAdminName"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/background_page"
@@ -11,16 +10,55 @@
     <LinearLayout
         android:layout_width="409dp"
         android:layout_height="657dp"
+        android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
 
         <TextView
-            android:id="@+id/textView19"
+            android:id="@+id/txtAdminName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textAlignment="center"
+            android:textColor="@android:color/holo_red_dark"
             android:textSize="40sp" />
+
+        <Button
+            android:id="@+id/btnUserActivity"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50sp"
+            android:background="@drawable/orange_button_into"
+            android:text="User"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btnTaskActivity"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40sp"
+            android:background="@drawable/orange_button_into"
+            android:text="Task"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btnCategoryActivity"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40sp"
+            android:background="@drawable/orange_button_into"
+            android:text="Category"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/btnNotificationActivity"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40sp"
+            android:background="@drawable/orange_button_into"
+            android:text="Notification"
+            android:textAlignment="center" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

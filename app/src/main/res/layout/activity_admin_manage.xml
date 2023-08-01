@@ -169,7 +169,7 @@
         android:layout_height="wrap_content"
         android:textSize="36sp"
         android:textColor="@color/white"
-        android:text="Admin Manager"
+        android:text="Welcome, Admin"
         android:layout_centerHorizontal="true"
         android:fontFamily="@font/alata"
         android:layout_marginTop="40dp"

@@ -10,6 +10,8 @@ public class TaskTable {
     public static final String COLUMN_CREATED = "createdTask";
     public static final String COLUMN_COMPLETE = "completed";
     public static final String COLUMN_USER = "userId";
+
+    public static final  String COLUMN_CATEGORY ="categoryId";
     public static String CREATE_TABLE_TASK =
             "CREATE TABLE " + TABLE_TASKS + " ( "
             + COLUMN_ID + " TEXT PRIMARY KEY, "
@@ -18,8 +20,11 @@ public class TaskTable {
             + COLUMN_CREATED + " TEXT NOT NULL, "
             + COLUMN_COMPLETE + " TEXT, "
             + COLUMN_USER + " INTEGER, "
-            + "FOREIGN KEY (" + COLUMN_USER  + ") REFERENCES "
-            + TABLE_NAME + "(" +  UserTable.COLUMN_ID + "))";
+            + "FOREIGN KEY (" + COLUMN_USER + ") REFERENCES "
+            + TABLE_NAME + "(" + RoleTable.COLUMN_ID +"), "
+            + "FOREIGN KEY (" + COLUMN_CATEGORY + ") REFERENCES "
+            + CategoryTable.TABLE_NAME + "(" + RoleTable.COLUMN_ID +"))";
+
     public static String DROP_TABLE_TASK =
             "DROP TABLE IF EXISTS " + TABLE_TASKS;
 }

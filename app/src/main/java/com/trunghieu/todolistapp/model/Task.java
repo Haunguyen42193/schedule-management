@@ -25,6 +25,15 @@ public class Task {
         this.userId = userId;
     }
 
+    public Task(String id, String title, String description, String createDate, String completed, int userId) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.createDate = createDate;
+        this.completed = completed;
+        this.userId = userId;
+    }
+
     public String getId() {
         return id;
     }

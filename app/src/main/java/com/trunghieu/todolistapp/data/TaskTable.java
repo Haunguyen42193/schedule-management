@@ -22,4 +22,5 @@ public class TaskTable {
             + TABLE_NAME + "(" +  UserTable.COLUMN_ID + "))";
     public static String DROP_TABLE_TASK =
             "DROP TABLE IF EXISTS " + TABLE_TASKS;
+    public static String SELECT_TASK = "SELECT * FROM " + TABLE_TASKS;
 }

@@ -22,7 +22,6 @@ public class User implements Serializable {
         this.role = 2;
 
     }
-
     public User(int id, String name, String email) {
         this.id = id;
         this.name = name;

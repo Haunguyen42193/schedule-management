@@ -14,15 +14,16 @@ public class Task {
     private String createDate;
     private String completed;
     private int userId;
+    private String categoryID;
 
-    public Task(String title, String description, String createDate, String completed, int userId) {
+    public Task(String title, String description, String createDate, String completed, int userId, String categoryID) {
         this.id = UUID.randomUUID().toString();
-
         this.title = title;
         this.description = description;
         this.createDate = createDate;
         this.completed = completed;
         this.userId = userId;
+        this.categoryID = categoryID;
     }
 
     public Task(String id, String title, String description, String createDate, String completed, int userId) {
@@ -80,5 +81,13 @@ public class Task {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getCategoryID() {
+        return categoryID;
+    }
+
+    public void setCategoryID(String categoryID) {
+        this.categoryID = categoryID;
     }
 }

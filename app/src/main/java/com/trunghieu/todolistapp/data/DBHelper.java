@@ -75,6 +75,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(TaskTable.COLUMN_CREATED, t.getCreateDate());
         values.put(TaskTable.COLUMN_COMPLETE, t.getCompleted());
         values.put(TaskTable.COLUMN_USER, t.getUserId());
+        values.put(TaskTable.COLUMN_CATEGORY,t.getCategoryID());
         long rs = db.insert(TaskTable.TABLE_TASKS, null, values);
         db.close();
         return rs != -1;
@@ -101,8 +102,8 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(CategoryTable.COLUMN_ID, t.getId());
         values.put(CategoryTable.COLUMN_NAME, t.getName());
-        values.put(CategoryTable.COLUMN_TASK_ID, t.getTaskId());
-        long rs = db.insert(CategoryTable.TABLE_CATEGORIES, null, values);
+        values.put(CategoryTable.COLUMN_DESCRIPTION, t.getdescription());
+        long rs = db.insert(CategoryTable.TABLE_NAME, null, values);
         db.close();
         return rs != -1;
     }

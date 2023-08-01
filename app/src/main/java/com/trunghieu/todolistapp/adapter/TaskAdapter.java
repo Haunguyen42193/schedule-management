@@ -37,9 +37,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Task task = listTask.get(position);
-        Integer i = 1;
-        holder.txtSttTaskAdmin.setText(position + 1);
-        holder.txtTaskItemTitleAdmin.setText(task.getCompleted());
+        holder.txtSttTaskAdmin.setText(String.valueOf(position + 1));
+        holder.txtTaskItemTitleAdmin.setText(task.getTitle());
         holder.cbIsCompleteTaskAdmin.setChecked(!task.getCompleted().isEmpty());
     }
 
@@ -56,6 +55,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return listTask.size();
     }
 }

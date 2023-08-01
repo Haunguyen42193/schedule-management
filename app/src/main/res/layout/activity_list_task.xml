@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="409dp"
         android:layout_height="657dp"
+        android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
@@ -26,7 +27,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/edtUserTasksAdmin"
+            android:id="@+id/textView17"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -39,7 +40,7 @@
 
         <EditText
             android:id="@+id/editTextText"
-            android:layout_width="match_parent"
+            android:layout_width="353dp"
             android:layout_height="wrap_content"
             android:layout_margin="10sp"
             android:background="@drawable/blue_boder"

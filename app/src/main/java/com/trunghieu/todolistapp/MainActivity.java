@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dbHelper = new DBHelper(this);
-        dbHelper.insertTask(new Task("Hau1", "Nguyen", "Van2", "2002", 1, "3"));
+//        dbHelper.insertTask(new Task("Hau1", "Nguyen", "Van2", "2002", 1, "3"));
         btnLogin = findViewById(R.id.btn_main_login);
         btnSignup = findViewById(R.id.btn_main_signup);
 

@@ -92,8 +92,8 @@ public class DBHelper extends SQLiteOpenHelper {
             String create = cursor.getString(3);
             String complete = cursor.getString(4);
             int userId = cursor.getInt(5);
-            String categoriId = cursor.getString(6);
-            Task task = new Task(id, title, description, create, complete, userId, categoriId);
+            String categoryId = cursor.getString(6);
+            Task task = new Task(id, title, description, create, complete, userId, categoryId);
             listTask.add(task);
         }
         return listTask;

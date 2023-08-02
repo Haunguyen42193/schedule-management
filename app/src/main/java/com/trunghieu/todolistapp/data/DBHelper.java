@@ -111,6 +111,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return listTask;
     }
+
     public boolean insertCategory(Category t) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -120,6 +121,74 @@ public class DBHelper extends SQLiteOpenHelper {
         long rs = db.insert(CategoryTable.TABLE_NAME, null, values);
         db.close();
         return rs != -1;
+    }
+    public ArrayList<Category> getCategoryData(){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery(CategoryTable.SELECT_CATEGORIES, null);
+        ArrayList<Category> lisCategory = new ArrayList<>();
+        while (cursor.moveToNext()){
+            String id = cursor.getString(0);
+            String name = cursor.getString(1);
+            String description = cursor.getString(2);
+            Category category = new Category(id, name, description);
+            lisCategory.add(category);
+        }
+        return lisCategory;
+    }
+
+    public Category getCategoryByID(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Category category = null;
+        Cursor cursor = db.query(
+                CategoryTable.TABLE_NAME,
+                null,
+                CategoryTable.COLUMN_ID + " = ?",
+                new String[]{id},
+                null,
+                null,
+                null
+        );
+        if (cursor != null && cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(CategoryTable.COLUMN_ID);
+            int nameIndex = cursor.getColumnIndex(CategoryTable.COLUMN_NAME);
+            int descIndex = cursor.getColumnIndex(CategoryTable.COLUMN_DESCRIPTION);
+
+
+            if (idIndex >= 0 && nameIndex >= 0 && descIndex >= 0 ) {
+                String idCate = cursor.getString(idIndex);
+                String name = cursor.getString(nameIndex);
+                String description = cursor.getString(descIndex);
+
+                category = new Category(idCate, name, description);
+
+            }
+            cursor.close();
+        }
+
+        return category;
+    }
+    public boolean deleteCategoryByID(String id) {
+        SQLiteDatabase db = getWritableDatabase();
+        int result = db.delete(CategoryTable.TABLE_NAME, CategoryTable.COLUMN_ID + " = ?", new String[]{id});
+        db.close();
+        return result > 0;
+    }
+    public boolean updateCategoryByID(String id, Category updateCategory) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(CategoryTable.COLUMN_NAME, updateCategory.getName());
+        values.put(CategoryTable.COLUMN_DESCRIPTION, updateCategory.getdescription());
+
+
+        int rowsAffected = db.update(
+                CategoryTable.TABLE_NAME,
+                values,
+                CategoryTable.COLUMN_ID + " = ?",
+                new String[]{id}
+        );
+        db.close();
+        return rowsAffected > 0;
     }
 
 
@@ -133,12 +202,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return rs != -1;
     }
-
-
-
-
-
-
 
     public boolean checkEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();

@@ -1,12 +1,16 @@
 package com.trunghieu.todolistapp.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity(tableName = "Categories")
-public class Category {
+public class Category implements Serializable {
     @PrimaryKey
     private String id;
     private String name;
@@ -14,6 +18,12 @@ public class Category {
 
     public Category(String name, String description) {
         this.id = UUID.randomUUID().toString();
+        this.name = name;
+        this.description = description;
+    }
+
+    public Category(String id, String name, String description) {
+        this.id = id;
         this.name = name;
         this.description = description;
     }
@@ -37,4 +47,6 @@ public class Category {
     public void setdescription(String taskId) {
         this.description = taskId;
     }
+
+
 }

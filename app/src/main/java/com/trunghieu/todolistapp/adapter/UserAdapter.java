@@ -85,10 +85,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         return arrayList.size();
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(User user);
-    }
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tdtID, tdtName, tdtEmail;
 
@@ -99,16 +95,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             tdtEmail = itemView.findViewById(R.id.admin_userEmail);
         }
     }
-    public void updateUser(User updatedUser) {
-        // Find the position of the updated user in the dataset
-        int position = arrayList.indexOf(updatedUser);
-        if (position != -1) {
-            // Update the user in the dataset
-            arrayList.set(position, updatedUser);
-            // Notify the adapter about the change in the dataset
-            notifyItemChanged(position);
-        }
-    }
+
     @SuppressLint("NotifyDataSetChanged")
     public void updateUserList(ArrayList<User> updatedList) {
         arrayList.clear();

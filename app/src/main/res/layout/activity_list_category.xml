@@ -8,6 +8,7 @@
 
 
     <TextView
+        android:id="@+id/tvCategoryList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -19,14 +20,21 @@
         android:textSize="30sp"
         android:textStyle="bold" />
 
-    <SearchView
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="121dp"
-        android:background="@drawable/blue_boder" />
+        android:background="@drawable/blue_boder"
+        android:focusable="false"
+        android:layout_marginTop="20dp"
+        app:closeIcon="@drawable/baseline_clear_24"
+        app:iconifiedByDefault="false"
+        app:queryHint="Search..."
+        app:searchHintIcon="@null"
+        app:searchIcon="@drawable/baseline_search_24"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="129dp"
+        android:layout_below="@id/tvCategoryList" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCategory"

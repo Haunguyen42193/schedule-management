@@ -73,14 +73,7 @@ public class ListUserActivity extends AppCompatActivity {
             }
         });
     }
-    private void showUserData() {
-        arrayList = dbHelper.getUserData();
-        // Lưu danh sách gốc vào originalList
-        originalList = new ArrayList<>(arrayList);
-        // Tạo adapter và hiển thị RecyclerView
-        adapter = new UserAdapter(this, arrayList);
-        recyclerView.setAdapter(adapter);
-    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -104,6 +97,18 @@ public class ListUserActivity extends AppCompatActivity {
             }
         }
     }
+    protected void onResume() {
+        super.onResume();
+        showUserData();
+    }
+    private void showUserData() {
+        arrayList = dbHelper.getUserData();
+        // Lưu danh sách gốc vào originalList
+        originalList = new ArrayList<>(arrayList);
+        // Tạo adapter và hiển thị RecyclerView
+        adapter = new UserAdapter(this, arrayList);
+        recyclerView.setAdapter(adapter);
+    }
 
     private void filterUsers(String query) {
         // Tạo một danh sách tạm thời để lưu trữ kết quả tìm kiếm
@@ -117,8 +122,5 @@ public class ListUserActivity extends AppCompatActivity {
         // Cập nhật RecyclerView với danh sách kết quả tìm kiếm
         adapter.updateUserList(filteredList);
     }
-    protected void onResume() {
-        super.onResume();
-        showUserData();
-    }
+
 }

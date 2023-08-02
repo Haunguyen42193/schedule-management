@@ -15,4 +15,6 @@ public class CategoryTable {
             COLUMN_DESCRIPTION + " TEXT)";
 
     public static String DROP_TABLE_CATEGORIES = "DROP TABLE IF EXISTS " + TABLE_NAME;
+
+    public static String SELECT_CATEGORIES = "SELECT * FROM " + TABLE_NAME;
 }

@@ -7,10 +7,22 @@
     android:theme="@style/Theme.MyApplication"
     tools:context=".ListTaskActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAddTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="40dp"
+        android:backgroundTint="@color/blue"
+        android:src="@drawable/baseline_add_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="409dp"
         android:layout_height="657dp"
-        android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="1dp"
         tools:layout_editor_absoluteY="1dp">
@@ -38,21 +50,30 @@
             android:textColor="@color/black"
             android:textSize="20dp" />
 
-        <EditText
-            android:id="@+id/editTextText"
-            android:layout_width="353dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10sp"
-            android:background="@drawable/blue_boder"
-            android:ems="10"
-            android:inputType="text"
-            android:text="Name"
-            android:textSize="20sp" />
+        <Spinner
+            android:id="@+id/spnUser"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:layout_marginLeft="20sp"
+            android:layout_marginRight="20sp"
+            android:background="@drawable/blue_boder" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcvTaskListAdmin"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/task_item" />
+
+        <TextView
+            android:id="@+id/txtNotic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50sp"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

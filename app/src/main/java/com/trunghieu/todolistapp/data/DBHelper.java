@@ -72,7 +72,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(TaskTable.COLUMN_ID, t.getId());
         values.put(TaskTable.COLUMN_TASK_TITLE, t.getTitle());
         values.put(TaskTable.COLUMN_DESCRIPTION, t.getDescription());
-        values.put(TaskTable.COLUMN_CREATED, t.getCreateDate());
+        values.put(TaskTable.COLUMN_START, t.getStartTime());
         values.put(TaskTable.COLUMN_COMPLETE, t.getCompleted());
         values.put(TaskTable.COLUMN_USER, t.getUserId());
         values.put(TaskTable.COLUMN_CATEGORY,t.getCategoryID());
@@ -81,21 +81,26 @@ public class DBHelper extends SQLiteOpenHelper {
         return rs != -1;
     }
 
-    public ArrayList<Task> getTaskData() {
+    public ArrayList<Task> getTaskData(String mail) {
         SQLiteDatabase db = getWritableDatabase();
-        Cursor cursor = db.rawQuery(TaskTable.SELECT_TASK,null);
+        String query = "SELECT * FROM " + TaskTable.TABLE_TASKS +
+                " WHERE " + TaskTable.COLUMN_USER + " IN (" +
+                "SELECT " + UserTable.COLUMN_ID + " FROM " + UserTable.TABLE_NAME +
+                " WHERE " + UserTable.COLUMN_EMAIL + " = ?)";
+        Cursor cursor = db.rawQuery(query,new String[] {mail});
         ArrayList<Task> listTask = new ArrayList<>();
         while(cursor.moveToNext()) {
             String id = cursor.getString(0);
             String title = cursor.getString(1);
             String description = cursor.getString(2);
-            String create = cursor.getString(3);
+            String start = cursor.getString(3);
             String complete = cursor.getString(4);
             int userId = cursor.getInt(5);
             String categoryId = cursor.getString(6);
-            Task task = new Task(id, title, description, create, complete, userId, categoryId);
+            Task task = new Task(id, title, description, start, complete, userId, categoryId);
             listTask.add(task);
         }
+        db.close();
         return listTask;
     }
     public boolean insertCategory(Category t) {
@@ -203,5 +208,61 @@ public class DBHelper extends SQLiteOpenHelper {
         int result = db.delete(UserTable.TABLE_NAME, UserTable.COLUMN_EMAIL + " = ?", new String[]{email});
         db.close();
         return result > 0;
+    }
+
+    public User getUserById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                UserTable.TABLE_NAME,
+                null,
+                UserTable.COLUMN_ID + " = ?",
+                new String[]{String.valueOf(id)},
+                null,
+                null,
+                null
+        );
+        if (cursor != null && cursor.moveToFirst()) {
+            int nameIndex = cursor.getColumnIndex(UserTable.COLUMN_NAME);
+            int emailIndex = cursor.getColumnIndex(UserTable.COLUMN_EMAIL);
+            int passwordIndex = cursor.getColumnIndex(UserTable.COLUMN_PASSWORD);
+            int roleIndex = cursor.getColumnIndex(UserTable.COLUMN_ROLE);
+            String name = cursor.getString(nameIndex);
+            String userMail = cursor.getString(emailIndex);
+            String password = cursor.getString(passwordIndex);
+            String role = cursor.getString(roleIndex);
+            User user = new User(id, name, userMail, password, Integer.parseInt(role));
+            cursor.close();
+            db.close();
+            return user;
+        }
+        return null;
+    }
+
+    public Category getCategoryById(String id) {
+        Category c = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        if (id != null) {
+            Cursor cursor = db.query(CategoryTable.TABLE_NAME,
+                    null,
+                    CategoryTable.COLUMN_ID + " = ?",
+                    new String[] {id},
+                    null,
+                    null,
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                String cateId = id;
+                int nameIndex = cursor.getColumnIndex(CategoryTable.COLUMN_NAME);
+                int desIndex = cursor.getColumnIndex(CategoryTable.COLUMN_DESCRIPTION);
+                String name = cursor.getString(nameIndex);
+                String des = cursor.getString(desIndex);
+                c = new Category(cateId, name, des);
+            }
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        db.close();
+        return c;
+
     }
 }

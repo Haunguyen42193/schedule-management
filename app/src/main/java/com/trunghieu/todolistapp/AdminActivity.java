@@ -11,6 +11,7 @@ import android.widget.TextView;
 public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
     TextView txtAdminName;
     Button btnTask;
+    Button btnUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +19,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_admin);
         txtAdminName = (TextView) findViewById(R.id.txtAdminName);
         btnTask = (Button) findViewById(R.id.btnTaskActivity);
+        btnUser = (Button) findViewById(R.id.btnUserActivity);
         if (getIntent().getExtras() != null) {
             // Lấy Bundle từ Intent
             Bundle bundle = getIntent().getExtras();
@@ -32,12 +34,17 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
             }
         }
         btnTask.setOnClickListener(this);
+        btnUser.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         if(btnTask.getId() == v.getId()) {
             Intent intent = new Intent(this, ListTaskActivity.class);
+            startActivity(intent);
+        }
+        if(btnUser.getId() == v.getId()) {
+            Intent intent = new Intent(this, ListUserActivity.class);
             startActivity(intent);
         }
     }

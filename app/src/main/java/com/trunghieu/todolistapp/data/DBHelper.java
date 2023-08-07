@@ -12,6 +12,7 @@ import com.trunghieu.todolistapp.model.Task;
 import com.trunghieu.todolistapp.model.User;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "TodoApp.db";
@@ -103,6 +104,81 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return listTask;
     }
+
+    public Task getTaskById(String id) {
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TaskTable.TABLE_TASKS +
+                " WHERE " + TaskTable.COLUMN_ID + " = ?";
+        Cursor cursor = db.rawQuery(query,new String[] {id});
+        Task t = null;
+        while(cursor.moveToNext()) {
+            String title = cursor.getString(1);
+            String description = cursor.getString(2);
+            String start = cursor.getString(3);
+            String complete = cursor.getString(4);
+            int userId = cursor.getInt(5);
+            String categoryId = cursor.getString(6);
+            t = new Task(id, title, description, start, complete, userId, categoryId);
+        }
+        db.close();
+        return t;
+    }
+
+    public ArrayList<Task> getTaskByCategoryIdUserId(String cateId, int uId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(TaskTable.TABLE_TASKS,
+                null,
+                TaskTable.COLUMN_CATEGORY + " = ? and " + TaskTable.COLUMN_USER + " = ?",
+                new String[] {cateId, String.valueOf(uId)},
+                null,
+                null,
+                null);
+        ArrayList<Task> list = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            String id = cursor.getString(0);
+            String title = cursor.getString(1);
+            String description = cursor.getString(2);
+            String start = cursor.getString(3);
+            String complete = cursor.getString(4);
+            int userId = cursor.getInt(5);
+            String categoryId = cursor.getString(6);
+            Task task = new Task(id, title, description, start, complete, userId, categoryId);
+            list.add(task);
+        }
+        db.close();
+        return list;
+    }
+
+    public boolean updateTask(Task t) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(TaskTable.COLUMN_ID, t.getId());
+        values.put(TaskTable.COLUMN_TASK_TITLE, t.getTitle());
+        values.put(TaskTable.COLUMN_DESCRIPTION, t.getDescription());
+        values.put(TaskTable.COLUMN_START, t.getStartTime());
+        values.put(TaskTable.COLUMN_COMPLETE, t.getCompleted());
+        values.put(TaskTable.COLUMN_USER, t.getUserId());
+        values.put(TaskTable.COLUMN_CATEGORY, t.getCategoryID());
+        String whereClause = TaskTable.COLUMN_ID + " = ?";
+        long rs = db.update(TaskTable.TABLE_TASKS,
+                values,
+                whereClause,
+                new String[] {t.getId()}
+        );
+        db.close();
+        return rs > 0;
+    }
+
+    public boolean deleteTask(String id) {
+        SQLiteDatabase db = getWritableDatabase();
+        long rs = 0;
+        if (id != null) {
+            rs = db.delete(TaskTable.TABLE_TASKS, TaskTable.COLUMN_ID + " = ? ", new String[] {id});
+        }
+        db.close();
+        return rs > 0;
+    }
+
     public boolean insertCategory(Category t) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -264,5 +340,33 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return c;
 
+    }
+    public ArrayList<Category> getCategoriesData() {
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<Category> list = new ArrayList<>();
+        Cursor cursor = db.query(CategoryTable.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+        if (cursor != null && cursor.moveToFirst()) {
+             do {
+                int cateIdIndex = cursor.getColumnIndex(CategoryTable.COLUMN_ID);
+                int nameIndex = cursor.getColumnIndex(CategoryTable.COLUMN_NAME);
+                int desIndex = cursor.getColumnIndex(CategoryTable.COLUMN_DESCRIPTION);
+                String name = cursor.getString(nameIndex);
+                String des = cursor.getString(desIndex);
+                String id = cursor.getString(cateIdIndex);
+                Category c = new Category(id, name, des);
+                list.add(c);
+            } while (cursor.moveToNext());
+        }
+        if(cursor != null) {
+            cursor.close();
+        }
+        db.close();
+        return list;
     }
 }

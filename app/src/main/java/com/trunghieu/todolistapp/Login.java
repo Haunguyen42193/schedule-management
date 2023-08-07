@@ -3,6 +3,7 @@ package com.trunghieu.todolistapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -37,18 +38,18 @@ public class Login extends AppCompatActivity {
                     Boolean checking = dbHelper.checkEmailPassword(email, pass);
                     if (checking) {
                         User user = dbHelper.getUserByEmail(email);
+                        SharedPreferences.Editor preferences = getSharedPreferences("session", MODE_PRIVATE).edit();
+                        preferences.putInt("user-id", user.getId());
+                        preferences.apply();
                         if (user.getRole() == 1) {
                             // Nếu role là 1 (Admin), chuyển đến AdminManageActivity
                             Toast.makeText(Login.this, "Login successful as Admin!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
-                            Bundle bundle = new Bundle();
-                            bundle.putString("UserName", user.getName());
-                            intent.putExtras(bundle);
                             startActivity(intent);
                         } else {
                             // Nếu role không phải là 1 (User), chuyển đến MainActivity
                             Toast.makeText(Login.this, "Login successful as User!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), ListUserActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), UserActivity.class);
                             startActivity(intent);
                         }
                     } else {

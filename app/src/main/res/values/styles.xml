@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CalendarTextStyle" parent="android:TextAppearance.Small">
+        <item name="android:textSize">18dp</item> <!-- Đặt kích thước chữ ở đây -->
+    </style>
+    <style name="MarkedDayStyle">
+        <item name="android:background">#FF0000</item> <!-- Đổi màu nền tùy ý -->
+    </style>
+</resources>

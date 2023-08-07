@@ -10,7 +10,7 @@ public class CategoryTable {
 
     public static String CREATE_TABLE_CATEGORIES = "CREATE TABLE IF NOT EXISTS " +
             TABLE_NAME + " ( " + COLUMN_ID + " TEXT PRIMARY KEY, " +
-            COLUMN_NAME + " TEXT NOT NULL, " +
+            COLUMN_NAME + " TEXT NOT NULL UNIQUE, " +
             COLUMN_DESCRIPTION + " TEXT)";
 
 

@@ -1,9 +1,13 @@
 package com.trunghieu.todolistapp;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.app.LauncherActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +36,7 @@ public class ListTaskActivity extends AppCompatActivity {
     private ArrayList<User> listUser;
     private TextView txtNotic;
     private FloatingActionButton btnAddTask;
+    private ActivityResultLauncher<Intent> launcher;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +68,18 @@ public class ListTaskActivity extends AppCompatActivity {
             spnUser.setAdapter(arrayAdapter);
             setUpSpinner();
         }
+
+        launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == RESULT_OK) {
+                Intent data = result.getData();
+                Bundle bundle = data.getExtras();
+                String status = bundle.getString("status");
+                if (status != null) {
+                    recreate();
+                }
+            }
+        });
+
         btnAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.trunghieu.todolistapp.R;
 import com.trunghieu.todolistapp.data.DBHelper;
 import com.trunghieu.todolistapp.model.Task;
-import com.trunghieu.todolistapp.model.User;
 
 import java.util.ArrayList;
 
@@ -49,6 +48,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         holder.txtTaskItemTitleAdmin.setText(task.getTitle());
         if (task.getCompleted() != null)
             holder.cbIsCompleteTaskAdmin.setChecked(true);
+        else holder.cbIsCompleteTaskAdmin.setChecked(false);
         holder.itemView.setOnClickListener(view -> {
             if(itemClickListener != null) {
                 itemClickListener.onItemClick(task);
@@ -56,7 +56,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         });
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtSttTaskAdmin, txtTaskItemTitleAdmin;
         CheckBox cbIsCompleteTaskAdmin;
         public ViewHolder(View itemView) {

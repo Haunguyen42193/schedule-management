@@ -6,12 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.trunghieu.todolistapp.model.Audio;
 import com.trunghieu.todolistapp.model.Category;
 import com.trunghieu.todolistapp.model.Notification;
 import com.trunghieu.todolistapp.model.Task;
 import com.trunghieu.todolistapp.model.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "TodoApp.db";
@@ -27,6 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(TaskTable.CREATE_TABLE_TASK);
         db.execSQL(CategoryTable.CREATE_TABLE_CATEGORIES);
         db.execSQL(NotificationTable.CREATE_TABLE_NOTIFICATION);
+        db.execSQL(AudioTable.CREATE_QUERY);
         insertRoles(db);
         isDatabaseCreated = true;
     }
@@ -37,6 +40,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(TaskTable.DROP_TABLE_TASK);
         db.execSQL(CategoryTable.DROP_TABLE_CATEGORIES);
         db.execSQL(NotificationTable.DROP_TABLE_NOTIFICATION);
+        db.execSQL(AudioTable.DROP_QUERY);
         onCreate(db);
     }
     private void insertRoles(SQLiteDatabase db) {
@@ -135,7 +139,6 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return lisCategory;
     }
-
     public Category getCategoryByID(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Category category = null;
@@ -202,6 +205,93 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return rs != -1;
     }
+
+    public boolean insertAudio(Audio t) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values= new ContentValues();
+        values.put(AudioTable.COLUMN_ID, t.getId());
+        values.put(AudioTable.COLUMN_NAME, t.getName());
+        values.put(AudioTable.COLUMN_FILE_PATH, t.getAudioFilePath());
+        long rs = db.insert(AudioTable.TABLE_NAME, null, values);
+        db.close();
+        return rs != -1 ;
+    }
+    public Audio getAudioByID(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Audio audio = null;
+        Cursor cursor = db.query(
+                AudioTable.TABLE_NAME,
+                null,
+                AudioTable.COLUMN_ID + " = ?",
+                new String[]{id},
+                null,
+                null,
+                null
+        );
+        if (cursor != null && cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(AudioTable.COLUMN_ID);
+            int nameIndex = cursor.getColumnIndex(AudioTable.COLUMN_NAME);
+            int filePathIndex = cursor.getColumnIndex(AudioTable.COLUMN_FILE_PATH);
+
+            if (idIndex >= 0 && nameIndex >= 0 && filePathIndex >= 0) {
+                String idAudio = cursor.getString(idIndex);
+                String name = cursor.getString(nameIndex);
+                String filePath = cursor.getString(filePathIndex);
+
+                audio = new Audio(idAudio, name, filePath);
+            }
+            cursor.close();
+        }
+
+        return audio;
+    }
+    public List<Audio> getAllAudios() {
+        List<Audio> audioList = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(AudioTable.SELECT_QUERY, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(AudioTable.COLUMN_ID);
+            int nameIndex = cursor.getColumnIndex(AudioTable.COLUMN_NAME);
+            int filePathIndex = cursor.getColumnIndex(AudioTable.COLUMN_FILE_PATH);
+           if(idIndex >= 0 && nameIndex >= 0 && filePathIndex >= 0){
+               do {
+                   String id = cursor.getString(idIndex);
+                   String name = cursor.getString(nameIndex);
+                   String filePath = cursor.getString(filePathIndex);
+                   Audio audio = new Audio(id, name, filePath);
+                   audioList.add(audio);
+               } while (cursor.moveToNext());
+           }
+            cursor.close();
+        }
+        db.close();
+        return audioList;
+    }
+    public boolean deleteAudioByID(String id) {
+        SQLiteDatabase db = getWritableDatabase();
+        int result = db.delete(AudioTable.TABLE_NAME, AudioTable.COLUMN_ID + " = ?", new String[]{id});
+        db.close();
+        return result > 0;
+    }
+    public boolean updateAudioByID(String id, Audio updateAudio) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(AudioTable.COLUMN_NAME, updateAudio.getName());
+        values.put(AudioTable.COLUMN_FILE_PATH, updateAudio.getAudioFilePath());
+
+
+        int rowsAffected = db.update(
+                AudioTable.TABLE_NAME,
+                values,
+                AudioTable.COLUMN_ID + " = ?",
+                new String[]{id}
+        );
+        db.close();
+        return rowsAffected > 0;
+    }
+
+
 
     public boolean checkEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();

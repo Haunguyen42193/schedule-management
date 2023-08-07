@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddCategoryActivity">
+
     <TextView
         android:id="@+id/tvAddCategory"
         android:layout_width="wrap_content"
@@ -13,13 +14,13 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="75dp"
         android:layout_marginBottom="90dp"
-        android:text="Add User"
-        app:flow_horizontalAlign="center"
+        android:fontFamily="@font/alata"
+        android:text="Add Category"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:fontFamily="@font/alata"
         android:textSize="40sp"
         android:textStyle="bold"
+        app:flow_horizontalAlign="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"

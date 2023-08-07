@@ -38,13 +38,13 @@ public class AddCategoryActivity extends AppCompatActivity {
 
                 if (isInserted) {
 
-                    Toast.makeText(AddCategoryActivity.this, "Người dùng đã được thêm mới", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddCategoryActivity.this, "Danh mục đã được thêm mới", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(AddCategoryActivity.this, ListCategoryActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
 
-                    Toast.makeText(AddCategoryActivity.this, "Có lỗi xảy ra khi thêm người dùng", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddCategoryActivity.this, "Có lỗi xảy ra khi thêm danh mục", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -28,11 +28,6 @@ public class Category implements Serializable {
         this.description = description;
     }
 
-    public Category(String id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
 
     public String getId() {
         return id;

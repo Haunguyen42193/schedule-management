@@ -49,11 +49,8 @@ public class Login extends AppCompatActivity {
                         } else {
                             // Nếu role không phải là 1 (User), chuyển đến MainActivity
                             Toast.makeText(Login.this, "Login successful as User!", Toast.LENGTH_SHORT).show();
-<<<<<<< HEAD
                             Intent intent = new Intent(getApplicationContext(), Login.class);
-=======
-                            Intent intent = new Intent(getApplicationContext(), UserActivity.class);
->>>>>>> 9e014b8549d80b8979c1b6f894c26966e30d18fc
+
                             startActivity(intent);
                         }
                     } else {

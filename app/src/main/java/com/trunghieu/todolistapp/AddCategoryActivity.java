@@ -1,8 +1,6 @@
 package com.trunghieu.todolistapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-<<<<<<< HEAD
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -18,24 +16,14 @@ public class AddCategoryActivity extends AppCompatActivity {
     private EditText edtName,  edtDescription;
     private Button addButton;
     private DBHelper dbHelper;
-
-
-
-=======
-import android.os.Bundle;
-
-public class AddCategoryActivity extends AppCompatActivity {
-
->>>>>>> main
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_category);
-<<<<<<< HEAD
         edtName = findViewById(R.id.edtAddCategory_Name);
         edtDescription = findViewById(R.id.edtAddCategory_Description);
         addButton = findViewById(R.id.admin_addCategory_btn);
-        dbHelper = new DBHelper( this);
+        dbHelper = new DBHelper(this);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,7 +45,5 @@ public class AddCategoryActivity extends AppCompatActivity {
             }
         });
 
-=======
->>>>>>> main
     }
 }

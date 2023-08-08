@@ -10,18 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-<<<<<<< HEAD
-public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
-    TextView txtAdminName;
-    Button btnTask, btnUser, btnCategory, btnAudio;
-=======
 import com.trunghieu.todolistapp.data.DBHelper;
 import com.trunghieu.todolistapp.model.User;
->>>>>>> 9e014b8549d80b8979c1b6f894c26966e30d18fc
 
 public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView txtAdminName;
-    private Button btnTask;
+    private Button btnTask,btnCategory, btnAudio;
     private Button btnUser;
     private String userName;
     private User userLogin;
@@ -31,26 +25,23 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_admin);
         txtAdminName = (TextView) findViewById(R.id.txtAdminName);
         btnTask = (Button) findViewById(R.id.btnTaskActivity);
-<<<<<<< HEAD
         btnCategory = (Button) findViewById(R.id.btnCategoryActivity);
         btnUser = (Button) findViewById(R.id.btnUserActivity);
         btnAudio = (Button) findViewById(R.id.btnNotificationActivity);
         getName(txtAdminName);
         btnTask.setOnClickListener(this);
-=======
         btnUser = (Button) findViewById(R.id.btnUserActivity);
         DBHelper dbHelper = new DBHelper(this);
         SharedPreferences preferences = getSharedPreferences("session", MODE_PRIVATE);
         userLogin = dbHelper.getUserById(preferences.getInt("user-id", -1));
-        if (userLogin!=null) {
+        if (userLogin != null) {
             userName = userLogin.getName();
             // Hiển thị tên người dùng lên TextView
             txtAdminName.setText("Welcome, " + userName + "!");
         }
         btnTask.setOnClickListener(this);
         btnUser.setOnClickListener(this);
-    }
->>>>>>> 9e014b8549d80b8979c1b6f894c26966e30d18fc
+
 
         btnUser.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +64,8 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(intent);
             }
         });
-
     }
+
     @Override
     public void onClick(View v) {
         if(btnTask.getId() == v.getId()) {

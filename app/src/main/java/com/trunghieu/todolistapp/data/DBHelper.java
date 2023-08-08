@@ -13,11 +13,9 @@ import com.trunghieu.todolistapp.model.Task;
 import com.trunghieu.todolistapp.model.User;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.List;
-=======
 import java.util.Calendar;
->>>>>>> 9e014b8549d80b8979c1b6f894c26966e30d18fc
+
 
 public class DBHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "TodoApp.db";
@@ -125,8 +123,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return listTask;
     }
 
-<<<<<<< HEAD
-=======
     public Task getTaskById(String id) {
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TaskTable.TABLE_TASKS +
@@ -201,7 +197,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return rs > 0;
     }
 
->>>>>>> 9e014b8549d80b8979c1b6f894c26966e30d18fc
     public boolean insertCategory(Category t) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -302,28 +297,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return rs != -1 ;
     }
-   /* public List<Audio> getAllAudios() {
-        List<Audio> audioList = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(AudioTable.SELECT_QUERY, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            int idIndex = cursor.getColumnIndex(AudioTable.COLUMN_ID);
-            int nameIndex = cursor.getColumnIndex(AudioTable.COLUMN_NAME);
-            int filePathIndex = cursor.getColumnIndex(AudioTable.COLUMN_FILE_PATH);
-            if(idIndex >= 0 && nameIndex >= 0 && filePathIndex >= 0){
-                do {
-                    String id = cursor.getString(idIndex);
-                    String name = cursor.getString(nameIndex);
-                    String filePath = cursor.getString(filePathIndex);
-                    Audio audio = new Audio(id, name, filePath);
-                    audioList.add(audio);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-        }
-        db.close();
-        return audioList;
-    }*/
+
     public ArrayList<Audio> getAudioData(){
         SQLiteDatabase db = getWritableDatabase();
         Cursor cursor = db.rawQuery(AudioTable.SELECT_QUERY,null);

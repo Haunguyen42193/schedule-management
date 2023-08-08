@@ -216,6 +216,41 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return rs != -1 ;
     }
+   /* public List<Audio> getAllAudios() {
+        List<Audio> audioList = new ArrayList<>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery(AudioTable.SELECT_QUERY, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            int idIndex = cursor.getColumnIndex(AudioTable.COLUMN_ID);
+            int nameIndex = cursor.getColumnIndex(AudioTable.COLUMN_NAME);
+            int filePathIndex = cursor.getColumnIndex(AudioTable.COLUMN_FILE_PATH);
+            if(idIndex >= 0 && nameIndex >= 0 && filePathIndex >= 0){
+                do {
+                    String id = cursor.getString(idIndex);
+                    String name = cursor.getString(nameIndex);
+                    String filePath = cursor.getString(filePathIndex);
+                    Audio audio = new Audio(id, name, filePath);
+                    audioList.add(audio);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+        db.close();
+        return audioList;
+    }*/
+    public ArrayList<Audio> getAudioData(){
+        SQLiteDatabase db = getWritableDatabase();
+        Cursor cursor = db.rawQuery(AudioTable.SELECT_QUERY,null);
+        ArrayList<Audio> listAudio = new ArrayList<>();
+        while (cursor.moveToNext()){
+            String id = cursor.getString(0);
+            String name = cursor.getString(1);
+            String filePath = cursor.getString(2);
+            Audio audio= new Audio(id, name, filePath);
+            listAudio.add(audio);
+        }
+        return listAudio;
+    }
     public Audio getAudioByID(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Audio audio = null;
@@ -245,28 +280,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return audio;
     }
-    public List<Audio> getAllAudios() {
-        List<Audio> audioList = new ArrayList<>();
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery(AudioTable.SELECT_QUERY, null);
-        if (cursor != null && cursor.moveToFirst()) {
-            int idIndex = cursor.getColumnIndex(AudioTable.COLUMN_ID);
-            int nameIndex = cursor.getColumnIndex(AudioTable.COLUMN_NAME);
-            int filePathIndex = cursor.getColumnIndex(AudioTable.COLUMN_FILE_PATH);
-           if(idIndex >= 0 && nameIndex >= 0 && filePathIndex >= 0){
-               do {
-                   String id = cursor.getString(idIndex);
-                   String name = cursor.getString(nameIndex);
-                   String filePath = cursor.getString(filePathIndex);
-                   Audio audio = new Audio(id, name, filePath);
-                   audioList.add(audio);
-               } while (cursor.moveToNext());
-           }
-            cursor.close();
-        }
-        db.close();
-        return audioList;
-    }
+
     public boolean deleteAudioByID(String id) {
         SQLiteDatabase db = getWritableDatabase();
         int result = db.delete(AudioTable.TABLE_NAME, AudioTable.COLUMN_ID + " = ?", new String[]{id});

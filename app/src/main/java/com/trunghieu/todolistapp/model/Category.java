@@ -17,7 +17,7 @@ public class Category implements Serializable {
     private String description;
 
     public Category(String name, String description) {
-        this.id = UUID.randomUUID().toString();
+        this.id ="CATE"+ UUID.randomUUID().toString();
         this.name = name;
         this.description = description;
     }

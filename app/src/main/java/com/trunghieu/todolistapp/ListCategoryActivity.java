@@ -20,7 +20,6 @@ import com.trunghieu.todolistapp.model.User;
 import java.util.ArrayList;
 
 public class ListCategoryActivity extends AppCompatActivity {
-
     private DBHelper dbHelper;
     private RecyclerView recyclerView;
     private ArrayList<Category> arrayList;
@@ -68,9 +67,7 @@ public class ListCategoryActivity extends AppCompatActivity {
                 return true;
             }
         });
-
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -86,7 +83,7 @@ public class ListCategoryActivity extends AppCompatActivity {
                     }
                 }
                 categoryAdapter.updateCategoryList(arrayList);
-                Toast.makeText(this, "List category updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Danh mục đã được cập nhật", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -99,7 +96,6 @@ public class ListCategoryActivity extends AppCompatActivity {
     private void ShowCategoryData() {
         arrayList = dbHelper.getCategoryData();
         originalList = new ArrayList<>(arrayList);
-
         categoryAdapter = new CategoryAdapter(this, arrayList);
         recyclerView.setAdapter(categoryAdapter);
     }

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
     TextView txtAdminName;
-    Button btnTask, btnUser, btnCategory, btnNotification;
+    Button btnTask, btnUser, btnCategory, btnAudio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         btnTask = (Button) findViewById(R.id.btnTaskActivity);
         btnCategory = (Button) findViewById(R.id.btnCategoryActivity);
         btnUser = (Button) findViewById(R.id.btnUserActivity);
-        btnNotification = (Button) findViewById(R.id.btnNotificationActivity);
+        btnAudio = (Button) findViewById(R.id.btnNotificationActivity);
         getName(txtAdminName);
         btnTask.setOnClickListener(this);
 
@@ -39,6 +39,14 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(intent);
             }
         });
+        btnAudio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AdminActivity.this, ListAudioActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
     @Override
     public void onClick(View v) {

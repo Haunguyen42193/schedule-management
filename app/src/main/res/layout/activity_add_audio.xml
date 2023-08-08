@@ -89,11 +89,12 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/edittext_bg_login"
         android:ems="10"
+        android:textColor="@color/black"
         android:fontFamily="@font/alata"
-        android:inputType="text"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
+        android:importantForAutofill="yes"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAddFileAudio"
         />

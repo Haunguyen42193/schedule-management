@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40sp"
             android:background="@drawable/orange_button_into"
-            android:text="Notification"
+            android:text="Audio"
             android:textAlignment="center" />
 
     </LinearLayout>

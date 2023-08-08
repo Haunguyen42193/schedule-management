@@ -19,8 +19,6 @@ public class DetailCategoryActivity extends AppCompatActivity {
 
     private Button btnDelete, btnUpdate;
     private EditText edtName, edtDescription;
-    private CategoryAdapter categoryAdapter;
-    private Category category;
     String categoryId;
     DBHelper dbHelper;
 
@@ -59,11 +57,11 @@ public class DetailCategoryActivity extends AppCompatActivity {
         boolean isDeleted = dbHelper.deleteCategoryByID(id);
 
         if (isDeleted) {
-            Toast.makeText(this, "Danh muc da duoc xoa ", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Danh mục đã được xóa ", Toast.LENGTH_SHORT).show();
 
             finish();
         } else {
-            Toast.makeText(this, "Có lỗi xảy ra khi xóa danh muc.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Có lỗi xảy ra khi xóa danh mục.", Toast.LENGTH_SHORT).show();
         }
     }
     public void onUpdateClicked(View view, String id) {

@@ -66,7 +66,6 @@ public class ListUserActivity extends AppCompatActivity {
                     arrayList.addAll(originalList);
                     adapter.notifyDataSetChanged();
                 } else {
-                    // Ngược lại, thực hiện tìm kiếm và cập nhật RecyclerView
                     filterUsers(newText);
                 }
                 return true;
@@ -93,7 +92,7 @@ public class ListUserActivity extends AppCompatActivity {
                 adapter.updateUserList(arrayList);
                 // Add a log or Toast here to check if the RecyclerView has been updated with the new data
                 // For example:
-                Toast.makeText(this, "RecyclerView updated with the new user data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Danh sách người dùng đã được cập nhật", Toast.LENGTH_SHORT).show();
             }
         }
     }

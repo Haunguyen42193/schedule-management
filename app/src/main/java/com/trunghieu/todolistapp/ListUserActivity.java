@@ -39,7 +39,7 @@ public class ListUserActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // add user
-        addButton = findViewById(R.id.add_button);
+        addButton = findViewById(R.id.btnAddTask);
         // Thêm sự kiện OnClickListener cho nút FloatingActionButton
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override

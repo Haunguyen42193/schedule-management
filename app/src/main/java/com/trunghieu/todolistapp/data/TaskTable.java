@@ -7,7 +7,7 @@ public class TaskTable {
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_TASK_TITLE = "title";
     public static final String COLUMN_DESCRIPTION = "description";
-    public static final String COLUMN_CREATED = "createdTask";
+    public static final String COLUMN_START = "startTime";
     public static final String COLUMN_COMPLETE = "completed";
     public static final String COLUMN_USER = "userId";
 
@@ -17,7 +17,7 @@ public class TaskTable {
             + COLUMN_ID + " TEXT PRIMARY KEY, "
             + COLUMN_TASK_TITLE + " TEXT NOT NULL, "
             + COLUMN_DESCRIPTION + " TEXT, "
-            + COLUMN_CREATED + " TEXT NOT NULL, "
+            + COLUMN_START + " TEXT NOT NULL, "
             + COLUMN_COMPLETE + " TEXT, "
             + COLUMN_USER + " INTEGER, "
             + COLUMN_CATEGORY + " TEXT, "
@@ -28,5 +28,4 @@ public class TaskTable {
 
     public static String DROP_TABLE_TASK =
             "DROP TABLE IF EXISTS " + TABLE_TASKS;
-    public static String SELECT_TASK = "SELECT * FROM " + TABLE_TASKS;
 }

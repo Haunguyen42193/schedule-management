@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReAddTaskActivity">
+
+    <LinearLayout
+        android:layout_width="412dp"
+        android:layout_height="669dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/txtTitleReAddTask"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginTop="50dp"
+            android:text="Add Task"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:padding="3sp"
+            android:shadowColor="@color/black"
+            android:text="Title"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/txtTitleReAdd"
+            android:layout_width="380sp"
+            android:layout_height="38dp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:background="@drawable/border"
+            android:ems="10"
+            android:hint="Add your task title here"
+            android:inputType="text"
+            android:paddingLeft="5dp" />
+
+        <TextView
+            android:layout_width="400sp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:padding="3sp"
+            android:shadowColor="@color/black"
+            android:text="Description"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+
+        <EditText
+            android:id="@+id/txtDesReAdd"
+            android:layout_width="380sp"
+            android:layout_height="120dp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:background="@drawable/border"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Add your task description here"
+            android:inputType="textMultiLine"
+            android:paddingLeft="5sp"
+            android:paddingTop="5sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="202dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="3sp"
+                    android:shadowColor="@color/black"
+                    android:text="Start"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/txtStartReAdd"
+                    android:layout_width="177sp"
+                    android:layout_height="38sp"
+                    android:layout_marginLeft="10sp"
+                    android:background="@drawable/border"
+                    android:paddingLeft="5sp"
+                    android:paddingTop="5sp"
+                    android:text="Click to set start"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:padding="3sp"
+                    android:shadowColor="@color/black"
+                    android:text="Categories"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <Spinner
+                    android:id="@+id/spnCateReAdd"
+                    android:layout_width="185dp"
+                    android:layout_height="38sp"
+                    android:background="@drawable/border"
+                    android:paddingLeft="5dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="186dp">
+
+            <Button
+                android:id="@+id/btnReAddTaskDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/orange_button_into"
+                android:text="ADD"
+                android:textAlignment="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.311" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

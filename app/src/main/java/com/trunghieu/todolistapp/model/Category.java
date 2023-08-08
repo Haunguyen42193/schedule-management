@@ -16,6 +16,12 @@ public class Category implements Serializable {
     private String name;
     private String description;
 
+    public Category(String id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
     public Category(String name, String description) {
         this.id ="CATE"+ UUID.randomUUID().toString();
         this.name = name;

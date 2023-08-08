@@ -8,10 +8,16 @@ public class CategoryTable {
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_DESCRIPTION ="description";
 
+<<<<<<< HEAD
 
     public static final String CREATE_TABLE_CATEGORIES = "CREATE TABLE IF NOT EXISTS " +
             TABLE_NAME + " ( " + COLUMN_ID + " TEXT PRIMARY KEY , " +
             COLUMN_NAME + " TEXT NOT NULL, " +
+=======
+    public static String CREATE_TABLE_CATEGORIES = "CREATE TABLE IF NOT EXISTS " +
+            TABLE_NAME + " ( " + COLUMN_ID + " TEXT PRIMARY KEY, " +
+            COLUMN_NAME + " TEXT NOT NULL UNIQUE, " +
+>>>>>>> 9e014b8549d80b8979c1b6f894c26966e30d18fc
             COLUMN_DESCRIPTION + " TEXT)";
 
     public static String DROP_TABLE_CATEGORIES = "DROP TABLE IF EXISTS " + TABLE_NAME;

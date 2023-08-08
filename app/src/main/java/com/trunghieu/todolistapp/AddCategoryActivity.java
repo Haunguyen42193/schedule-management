@@ -2,6 +2,7 @@ package com.trunghieu.todolistapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+<<<<<<< HEAD
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,10 +21,17 @@ public class AddCategoryActivity extends AppCompatActivity {
 
 
 
+=======
+import android.os.Bundle;
+
+public class AddCategoryActivity extends AppCompatActivity {
+
+>>>>>>> main
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_category);
+<<<<<<< HEAD
         edtName = findViewById(R.id.edtAddCategory_Name);
         edtDescription = findViewById(R.id.edtAddCategory_Description);
         addButton = findViewById(R.id.admin_addCategory_btn);
@@ -49,5 +57,7 @@ public class AddCategoryActivity extends AppCompatActivity {
             }
         });
 
+=======
+>>>>>>> main
     }
 }

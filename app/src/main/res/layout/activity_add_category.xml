@@ -5,7 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddCategoryActivity">
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
     <TextView
         android:id="@+id/tvAddCategory"
         android:layout_width="wrap_content"
@@ -14,6 +17,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="75dp"
         android:layout_marginBottom="90dp"
+<<<<<<< HEAD
         android:fontFamily="@font/alata"
         android:text="Add Category"
         android:textAlignment="center"
@@ -21,6 +25,15 @@
         android:textSize="40sp"
         android:textStyle="bold"
         app:flow_horizontalAlign="center"
+=======
+        android:text="Add User"
+        app:flow_horizontalAlign="center"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:fontFamily="@font/alata"
+        android:textSize="40sp"
+        android:textStyle="bold"
+>>>>>>> main
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.493"
@@ -28,6 +41,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.061" />
 
+<<<<<<< HEAD
     <TextView
         android:id="@+id/tvAddCategory_Name"
         android:layout_width="wrap_content"
@@ -43,6 +57,23 @@
         app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvAddCategory" />
+=======
+   <TextView
+    android:id="@+id/tvAddCategory_Name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="5dp"
+    android:layout_marginTop="30dp"
+    android:layout_marginEnd="95dp"
+    android:text="Name"
+    android:textSize="20dp"
+    android:textColor="@color/black"
+    android:fontFamily="@font/alata"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.085"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/tvAddCategory" />
+>>>>>>> main
 
     <EditText
         android:id="@+id/edtAddCategory_Name"
@@ -86,6 +117,10 @@
         android:background="@drawable/edittext_bg_login"
         android:ems="10"
         android:fontFamily="@font/alata"
+<<<<<<< HEAD
+=======
+        android:hint="example@gmail.com"
+>>>>>>> main
         android:inputType="text"
         android:padding="10dp"
         android:layout_marginLeft="20dp"
@@ -97,7 +132,11 @@
 
 
     <androidx.appcompat.widget.AppCompatButton
+<<<<<<< HEAD
         android:id="@+id/admin_addCategory_btn"
+=======
+        android:id="@+id/admin_addUser_btn"
+>>>>>>> main
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"

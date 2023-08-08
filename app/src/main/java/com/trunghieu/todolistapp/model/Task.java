@@ -11,26 +11,26 @@ public class Task {
     private String id;
     private String title;
     private String description;
-    private String createDate;
+    private String startTime;
     private String completed;
     private int userId;
     private String categoryID;
 
-    public Task(String title, String description, String createDate, String completed, int userId, String categoryID) {
+    public Task(String title, String description, String startTime, String completed, int userId, String categoryID) {
         this.id = UUID.randomUUID().toString();
         this.title = title;
         this.description = description;
-        this.createDate = createDate;
+        this.startTime = startTime;
         this.completed = completed;
         this.userId = userId;
         this.categoryID = categoryID;
     }
 
-    public Task(String id, String title, String description, String createDate, String completed, int userId, String categoryID) {
+    public Task(String id, String title, String description, String startTime, String completed, int userId, String categoryID) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.createDate = createDate;
+        this.startTime = startTime;
         this.completed = completed;
         this.userId = userId;
         this.categoryID = categoryID;
@@ -48,8 +48,8 @@ public class Task {
         return description;
     }
 
-    public String getCreateDate() {
-        return createDate;
+    public String getStartTime() {
+        return startTime;
     }
 
     public String getCompleted() {
@@ -72,8 +72,8 @@ public class Task {
         this.description = description;
     }
 
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
     public void setCompleted(String completed) {

@@ -1,5 +1,6 @@
 package com.trunghieu.todolistapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
@@ -21,6 +22,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     private ArrayList<Task> listTask;
     private Context context;
     private SQLiteDatabase database;
+    private OnItemClickListener itemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.itemClickListener = listener;
+    }
+
 
     public TaskAdapter(ArrayList<Task> listTask, Context context) {
         this.listTask = listTask;
@@ -39,10 +46,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         Task task = listTask.get(position);
         holder.txtSttTaskAdmin.setText(String.valueOf(position + 1));
         holder.txtTaskItemTitleAdmin.setText(task.getTitle());
-        holder.cbIsCompleteTaskAdmin.setChecked(!task.getCompleted().isEmpty());
+        if (task.getCompleted() != null)
+            holder.cbIsCompleteTaskAdmin.setChecked(true);
+        else holder.cbIsCompleteTaskAdmin.setChecked(false);
+        holder.itemView.setOnClickListener(view -> {
+            if(itemClickListener != null) {
+                itemClickListener.onItemClick(task);
+            }
+        });
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtSttTaskAdmin, txtTaskItemTitleAdmin;
         CheckBox cbIsCompleteTaskAdmin;
         public ViewHolder(View itemView) {
@@ -56,5 +70,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return listTask.size();
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void updateTaskList(ArrayList<Task> updatedList) {
+        listTask.clear();
+        listTask.addAll(updatedList);
+        notifyDataSetChanged();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Task task);
     }
 }

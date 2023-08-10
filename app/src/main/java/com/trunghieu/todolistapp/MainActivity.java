@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 //        dbHelper.insertTask(new Task("Do exercise", "squad", "03/08/2023 06:30:00", null, 1, null));
 //        dbHelper.insertCategory(new Category("Work", "Some things to do in your work"));
 //        dbHelper.insertCategory(new Category("Study", "Some things to do like exercise"));
+//        dbHelper.insertCategory(new Category("Play", "Some things to play like video game"));
         btnLogin = findViewById(R.id.btn_main_login);
         btnSignup = findViewById(R.id.btn_main_signup);
 

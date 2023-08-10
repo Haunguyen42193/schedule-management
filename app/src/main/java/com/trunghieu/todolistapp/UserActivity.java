@@ -57,6 +57,7 @@ public class UserActivity extends AppCompatActivity{
     private Calendar calendar;
     private FloatingActionButton fltUserAddTaskButton;
     private ActivityResultLauncher<Intent> launcher;
+    private Button btnHistory;
 
     @SuppressLint({"MissingInflatedId", "ResourceType", "SetTextI18n"})
     @Override
@@ -87,6 +88,7 @@ public class UserActivity extends AppCompatActivity{
         txtSelectedTime = (TextView) findViewById(R.id.txtSelectedTime);
         calendar = Calendar.getInstance();
         fltUserAddTaskButton = (FloatingActionButton) findViewById(R.id.fltUserAddTaskButton);
+        btnHistory = (Button) findViewById(R.id.btnHistory);
 
         if(!listTask.isEmpty()) {
             rvItemTaskUser.setVisibility(View.VISIBLE);
@@ -155,6 +157,16 @@ public class UserActivity extends AppCompatActivity{
                     Intent intent = new Intent(UserActivity.this, AddTaskActivity.class);
                     startActivity(intent);
                 }
+            }
+        });
+        btnHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserActivity.this, HistoryActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("user-mail", userLogin.getEmail());
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }

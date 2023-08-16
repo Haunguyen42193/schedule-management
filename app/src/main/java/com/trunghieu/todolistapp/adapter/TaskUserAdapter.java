@@ -10,15 +10,19 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.trunghieu.todolistapp.R;
+import com.trunghieu.todolistapp.Utils;
 import com.trunghieu.todolistapp.data.DBHelper;
 import com.trunghieu.todolistapp.model.Task;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TaskUserAdapter extends RecyclerView.Adapter<TaskUserAdapter.ViewHolder> {
     private ArrayList<Task> listTask;
@@ -65,7 +69,13 @@ public class TaskUserAdapter extends RecyclerView.Adapter<TaskUserAdapter.ViewHo
         holder.txtUserCateItem.setText(dbHelper.getCategoryById(task.getCategoryID()).getName());
         if (task.getCompleted() != null) {
             holder.cbIsCompleteTaskUser.setChecked(true);
+            holder.cbIsCompleteTaskUser.setEnabled(false);
         }else holder.cbIsCompleteTaskUser.setChecked(false);
+        holder.cbIsCompleteTaskUser.setOnClickListener( view -> {
+            if (clickListener != null) {
+                clickListener.onCheckBoxClick(task, holder.cbIsCompleteTaskUser);
+            }
+        });
         holder.itemView.setOnClickListener(view -> {
             if(clickListener != null) {
                 clickListener.onItemClick(task);
@@ -80,6 +90,7 @@ public class TaskUserAdapter extends RecyclerView.Adapter<TaskUserAdapter.ViewHo
 
     public interface OnItemClickListener {
         void onItemClick(Task task);
+        void onCheckBoxClick(Task task, CheckBox cb);
     }
 
     @SuppressLint("NotifyDataSetChanged")

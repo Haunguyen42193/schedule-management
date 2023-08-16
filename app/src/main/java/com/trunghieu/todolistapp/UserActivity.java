@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -277,6 +278,7 @@ public class UserActivity extends AppCompatActivity{
         timePickerDialog.show();
     }
 
+
     public void setOnClickRecyclerView() {
         taskUserAdapter.setOnItemClickListener(new TaskUserAdapter.OnItemClickListener() {
             @Override
@@ -306,6 +308,29 @@ public class UserActivity extends AppCompatActivity{
                 }
                 intent.putExtras(bundle);
                 startActivity(intent);
+            }
+
+            @Override
+            public void onCheckBoxClick(Task task, CheckBox cb) {
+                Task t= task;
+                Date date = null;
+                try {
+                    Date start = Utils.sdf.parse(t.getStartTime());
+                    date = new Date();
+                    assert start != null;
+                    if (start.after(date)){
+                        Toast.makeText(UserActivity.this, "Invalid", Toast.LENGTH_LONG).show();
+                        cb.setChecked(false);
+                        return;
+                    }
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                t.setCompleted(Utils.sdf.format(date));
+                if(cb.isChecked())
+                    cb.setEnabled(false);
+                dbHelper.updateTask(t);
+                Toast.makeText(UserActivity.this, "Task completed", Toast.LENGTH_LONG).show();
             }
         });
     }

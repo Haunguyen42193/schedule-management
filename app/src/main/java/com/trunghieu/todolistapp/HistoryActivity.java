@@ -3,6 +3,7 @@ package com.trunghieu.todolistapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,7 @@ public class HistoryActivity extends AppCompatActivity {
     private ArrayList<Task> listTask;
     private Button btnSort;
     private ArrayList<Task> listTaskConplete;
+    private Button btnBack;
 
     @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
@@ -41,6 +43,15 @@ public class HistoryActivity extends AppCompatActivity {
         btnSort = (Button) findViewById(R.id.btnSort);
         dbHelper = new DBHelper(this);
         listTask = new ArrayList<>();
+        btnBack = findViewById(R.id.btnBack7);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = getIntent();
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+            }
+        });
 
         listTask = dbHelper.getTaskData(bundle.getString("user-mail"));
         final int[] isDecrease = {1};
@@ -111,12 +122,29 @@ public class HistoryActivity extends AppCompatActivity {
         for(Task task: listTaskConplete) {
             if (task.getCompleted() != null) {
                 i++;
+                StringBuilder t1 = new StringBuilder("");
+                StringBuilder t2 = new StringBuilder("\t\t\t\t");
+                StringBuilder t3 = new StringBuilder("\t\t\t\t\t\t");
+                StringBuilder t4 = new StringBuilder("\t\t\t\t\t");
+                StringBuilder t5 = new StringBuilder(task.getTitle());
+                if((String.valueOf(i).length() - 2) > 0) {
+                    for(int j = 0; j < (String.valueOf(i).length() - 2); j++) {
+                        t1.replace(0, 1, "");
+                    }
+                }
+                if(task.getTitle().length() - 4 > 0) {
+                    for(int j = 0; j < (task.getTitle().length() - 4); j++) {
+                        t3.replace(0, 1, "");
+                        if(j==2)
+                            t5.replace(j + 4, task.getTitle().length(),"");
+                    }
+                }
                 TextView txtContent = new TextView(this);
                 try {
-                    txtContent.setText("\t\t" + i + "\t\t\t\t\t\t" +
-                            task.getTitle() + "\t\t\t\t\t\t\t\t" +
-                            sdf.format(sdf.parse(task.getStartTime())) +
-                            "\t\t\t\t\t\t\t" +
+                    txtContent.setText(t1 + String.valueOf(i)+ "\t" + t2+ "\t" +
+                            t5+ "\t" + t3 + "\t" +
+                            sdf.format(sdf.parse(task.getStartTime()))+ "\t" +
+                            t4+ "\t" +
                             sdf.format(sdf.parse(task.getCompleted())));
                 } catch (ParseException e) {
                     throw new RuntimeException(e);

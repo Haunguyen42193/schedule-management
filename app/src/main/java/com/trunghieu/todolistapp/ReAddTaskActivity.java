@@ -2,6 +2,7 @@ package com.trunghieu.todolistapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -102,6 +103,8 @@ public class ReAddTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String status = addTask();
                 Toast.makeText(ReAddTaskActivity.this, status, Toast.LENGTH_LONG).show();
+                Intent intent = getIntent();
+                setResult(Activity.RESULT_OK, intent);
                 finish();
             }
         });

@@ -40,6 +40,7 @@ public class AddTaskActivity extends AppCompatActivity {
     private Category selectedCate;
     private Button btnAddTaskDetail;
     private User userLogin;
+    private Button btnBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +53,13 @@ public class AddTaskActivity extends AppCompatActivity {
         spnCateAdd = (Spinner) findViewById(R.id.spnCateAdd);
         calendar = Calendar.getInstance();
         btnAddTaskDetail = (Button) findViewById(R.id.btnAddTaskDetail);
+        btnBack = findViewById(R.id.btnBack6);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         txtStartAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

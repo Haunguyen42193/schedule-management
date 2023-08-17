@@ -59,6 +59,7 @@ public class UserActivity extends AppCompatActivity{
     private FloatingActionButton fltUserAddTaskButton;
     private ActivityResultLauncher<Intent> launcher;
     private Button btnHistory;
+    private Button btnBack;
 
     @SuppressLint({"MissingInflatedId", "ResourceType", "SetTextI18n"})
     @Override
@@ -73,6 +74,14 @@ public class UserActivity extends AppCompatActivity{
         if(userLogin!=null) {
             userLogin = dbHelper.getUserById(userLogin.getId());
         }
+
+        btnBack = findViewById(R.id.btnBack3);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         //Lấy các phần tử
         cldMain = (CalendarView) findViewById(R.id.cldMain);
@@ -144,6 +153,7 @@ public class UserActivity extends AppCompatActivity{
         launcher= registerForActivityResult( new ActivityResultContracts.StartActivityForResult(), result -> {
             if(result.getResultCode() == RESULT_OK){
                 Intent data = result.getData();
+                assert data != null;
                 Bundle bundle = data.getExtras();
                 String status = bundle.getString("status");
                 if(status != null) {

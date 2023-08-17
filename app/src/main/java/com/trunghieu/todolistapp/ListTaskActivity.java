@@ -37,6 +37,7 @@ public class ListTaskActivity extends AppCompatActivity {
     private TextView txtNotic;
     private FloatingActionButton btnAddTask;
     private ActivityResultLauncher<Intent> launcher;
+    private Button btnBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,13 @@ public class ListTaskActivity extends AppCompatActivity {
         txtNotic = findViewById(R.id.txtNotic);
         spnUser = findViewById(R.id.spnUser);
         btnAddTask = (FloatingActionButton) findViewById(R.id.btnAddTask);
+        btnBack = findViewById(R.id.btnBack5);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         //lấy danh sách cần hiển thị
         dbHelper = new DBHelper(this);

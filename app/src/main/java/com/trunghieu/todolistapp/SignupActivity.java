@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 import com.trunghieu.todolistapp.data.DBHelper;
 import com.trunghieu.todolistapp.model.User;
@@ -18,6 +19,8 @@ public class SignupActivity extends AppCompatActivity {
     DBHelper dbHelper;
     private int role =1;
 
+    Button btnBack;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,13 @@ public class SignupActivity extends AppCompatActivity {
         binding = ActivitySignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         dbHelper = new DBHelper(this);
+        btnBack = findViewById(R.id.btnBack2);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         binding.btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override

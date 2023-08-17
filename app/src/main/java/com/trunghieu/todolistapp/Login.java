@@ -6,18 +6,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
 import com.trunghieu.todolistapp.data.DBHelper;
 import com.trunghieu.todolistapp.databinding.ActivityLoginBinding;
 import com.trunghieu.todolistapp.model.User;
 
 
 public class Login extends AppCompatActivity {
-
-
     ActivityLoginBinding binding;
     DBHelper dbHelper;
+
+    Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,13 @@ public class Login extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         dbHelper = new DBHelper(this);
+        btnBack = findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

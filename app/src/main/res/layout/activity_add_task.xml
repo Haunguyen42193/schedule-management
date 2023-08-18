@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".AddTaskActivity">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnBack6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:layout_width="412dp"
         android:layout_height="669dp"

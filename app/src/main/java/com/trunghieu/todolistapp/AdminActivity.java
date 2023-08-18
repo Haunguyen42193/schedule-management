@@ -19,6 +19,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     private Button btnUser;
     private String userName;
     private User userLogin;
+    private Button btnBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +42,13 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         }
         btnTask.setOnClickListener(this);
         btnUser.setOnClickListener(this);
-
+        btnBack = findViewById(R.id.btnBack8);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         btnUser.setOnClickListener(new View.OnClickListener() {
             @Override

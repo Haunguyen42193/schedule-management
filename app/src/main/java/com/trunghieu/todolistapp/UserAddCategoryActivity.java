@@ -14,7 +14,7 @@ import com.trunghieu.todolistapp.model.Category;
 
 public class UserAddCategoryActivity extends AppCompatActivity {
     private EditText edtUserAddCateName, edtUserAddCateDes;
-    private Button btn_UserAddCate;
+    private Button btn_UserAddCate, btn_BackAddCate;
 
     private DBHelper dbHelper;
     @Override
@@ -26,7 +26,13 @@ public class UserAddCategoryActivity extends AppCompatActivity {
         edtUserAddCateDes = findViewById(R.id.edtUserAddCategory_Description);
         btn_UserAddCate = findViewById(R.id.admin_userAddCategory_btn);
         dbHelper = new DBHelper(this);
-
+        btn_BackAddCate = findViewById(R.id.btnBackAddCate);
+        btn_BackAddCate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         btn_UserAddCate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

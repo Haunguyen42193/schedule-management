@@ -43,7 +43,11 @@ public class AddTaskActivity extends AppCompatActivity {
     private Audio selectedAudio;
     private Button btnAddTaskDetail, btnUserUploadAudio;
     private User userLogin;
+
     private Audio userLogin1;
+
+
+    private Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +62,18 @@ public class AddTaskActivity extends AppCompatActivity {
         spnListAudio = (Spinner) findViewById(R.id.spnListAudio);
         calendar = Calendar.getInstance();
         btnAddTaskDetail = (Button) findViewById(R.id.btnAddTaskDetail);
+
         //btn upload audio
         btnUserUploadAudio = (Button) findViewById(R.id.btn_UserUploadAudio);
+
+        btnBack = findViewById(R.id.btnBack6);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         txtStartAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -13,7 +13,7 @@ import com.trunghieu.todolistapp.data.DBHelper;
 import com.trunghieu.todolistapp.model.Category;
 
 public class UserUpdateDeleteCategory extends AppCompatActivity {
-    private Button btnDelete, btnUpdate;
+    private Button btnDelete, btnUpdate, btnBackUpdateDeleteCategory;
     private EditText edtName, edtDescription;
     String categoryId;
     DBHelper dbHelper;
@@ -21,6 +21,13 @@ public class UserUpdateDeleteCategory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail_category);
+        btnBackUpdateDeleteCategory = findViewById(R.id.btnBackUpdateDeleteCate);
+        btnBackUpdateDeleteCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         edtName = findViewById(R.id.admin_user_detail_edtNameCategory);
         edtDescription = findViewById(R.id.admin_user_detail_edtDescCategory);
         btnDelete = findViewById(R.id.button_user_delete_category);

@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -50,6 +51,8 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
     private String taskCate;
     private Category selectedCate;
     private User userLogin;
+    private Button btnBack;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +76,20 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
         listCate = dbHelper.getCategoriesData();
         SharedPreferences preferences = getSharedPreferences("session", MODE_PRIVATE);
         userLogin = dbHelper.getUserById(preferences.getInt("user-id", -1));
+
+        btnBack = findViewById(R.id.btnBack4);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String status = "Back";
+                Intent intent = getIntent();
+                Bundle bundle = intent.getExtras();
+                bundle.putString("status",status);
+                intent.putExtras(bundle);
+                setResult(Activity.RESULT_OK, intent);
+                finish();
+            }
+        });
 
         //Nhận dữ liệu từ ListTaskActivity
         Intent myReceiveIntent = getIntent();
@@ -132,8 +149,9 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        Intent intent;
+
         if(btnReAddTask.getId() == v.getId()) {
+            Intent intent;
             intent = new Intent(this, ReAddTaskActivity.class);
             Bundle bundle = new Bundle();
             bundle.putString("re-add-task-title", txtTitle.getText().toString());
@@ -146,6 +164,7 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
         if (btnUpdateTask.getId() == v.getId()) {
             String status = updateTask();
             Toast.makeText(this, status, Toast.LENGTH_LONG).show();
+
         }
         if (btnDeleteTask.getId() == v.getId()) {
             showConfirmDialog();
@@ -244,6 +263,11 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
             public void onClick(DialogInterface dialog, int which) {
                 String status = deleteTask();
                 Toast.makeText(TaskDetailActivity.this, status, Toast.LENGTH_LONG).show();
+                Intent intent = getIntent();
+                Bundle bundle = intent.getExtras();
+                bundle.putString("status",status);
+                intent.putExtras(bundle);
+                setResult(Activity.RESULT_OK, intent);
                 finish();
             }
         });

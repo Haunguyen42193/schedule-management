@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -24,18 +25,26 @@ public class UserDetailCategoryActivity extends AppCompatActivity {
     private ArrayList<Category> originalList;
     private CategoryAdapter categoryAdapter;
     androidx.appcompat.widget.SearchView searchView;
+    private Button btn_backListCate;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_list_category);
-
+        btn_backListCate = findViewById(R.id.btnBackListCate);
+        btn_backListCate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         searchView= findViewById(R.id.search_user_category);
         dbHelper = new DBHelper(this);
         recyclerView = findViewById(R.id.recyclerViewUserCategory);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
         searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener(){
 
             @Override

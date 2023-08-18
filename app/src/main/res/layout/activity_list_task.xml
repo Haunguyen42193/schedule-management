@@ -7,6 +7,16 @@
     android:theme="@style/Theme.MyApplication"
     tools:context=".ListTaskActivity">
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBack5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="Back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btnAddTask"
             android:layout_width="wrap_content"

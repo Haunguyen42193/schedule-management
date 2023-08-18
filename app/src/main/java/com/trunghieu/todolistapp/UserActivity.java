@@ -4,41 +4,27 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
-import android.widget.GridView;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.trunghieu.todolistapp.adapter.TaskAdapter;
 import com.trunghieu.todolistapp.adapter.TaskUserAdapter;
 import com.trunghieu.todolistapp.data.DBHelper;
 import com.trunghieu.todolistapp.model.Audio;
@@ -46,10 +32,7 @@ import com.trunghieu.todolistapp.model.Category;
 import com.trunghieu.todolistapp.model.Task;
 import com.trunghieu.todolistapp.model.User;
 
-import java.io.File;
-import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -75,7 +58,7 @@ public class UserActivity extends AppCompatActivity{
     private ActivityResultLauncher<Intent> launcher;
     private Button btnHistory, btnUserListCate;
     private MediaPlayer mediaPlayer;
-
+    private Button btnBack;
 
     @SuppressLint({"MissingInflatedId", "ResourceType", "SetTextI18n"})
     @Override
@@ -89,6 +72,14 @@ public class UserActivity extends AppCompatActivity{
         if(userLogin!=null) {
             userLogin = dbHelper.getUserById(userLogin.getId());
         }
+
+        btnBack = findViewById(R.id.btnBack3);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         //Lấy các phần tử
 
@@ -167,6 +158,7 @@ public class UserActivity extends AppCompatActivity{
         launcher= registerForActivityResult( new ActivityResultContracts.StartActivityForResult(), result -> {
             if(result.getResultCode() == RESULT_OK){
                 Intent data = result.getData();
+                assert data != null;
                 Bundle bundle = data.getExtras();
                 String status = bundle.getString("status");
                 if(status != null) {
@@ -322,6 +314,7 @@ public class UserActivity extends AppCompatActivity{
         timePickerDialog.show();
     }
 
+
     public void setOnClickRecyclerView() {
         taskUserAdapter.setOnItemClickListener(new TaskUserAdapter.OnItemClickListener() {
             @Override
@@ -351,6 +344,29 @@ public class UserActivity extends AppCompatActivity{
                 }
                 intent.putExtras(bundle);
                 startActivity(intent);
+            }
+
+            @Override
+            public void onCheckBoxClick(Task task, CheckBox cb) {
+                Task t= task;
+                Date date = null;
+                try {
+                    Date start = Utils.sdf.parse(t.getStartTime());
+                    date = new Date();
+                    assert start != null;
+                    if (start.after(date)){
+                        Toast.makeText(UserActivity.this, "Invalid", Toast.LENGTH_LONG).show();
+                        cb.setChecked(false);
+                        return;
+                    }
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                t.setCompleted(Utils.sdf.format(date));
+                if(cb.isChecked())
+                    cb.setEnabled(false);
+                dbHelper.updateTask(t);
+                Toast.makeText(UserActivity.this, "Task completed", Toast.LENGTH_LONG).show();
             }
         });
     }

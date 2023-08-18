@@ -6,14 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".UserActivity">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnBack3"
+        android:layout_width="86dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="4dp"
+        android:text="Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <CalendarView
         android:id="@+id/cldMain"
-        android:layout_width="346dp"
-        android:layout_height="301dp"
+        android:layout_width="413dp"
+        android:layout_height="334dp"
+        android:layout_marginTop="20dp"
         android:dateTextAppearance="@style/CalendarTextStyle"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="18dp" />
+        tools:layout_editor_absoluteX="0dp" />
+
 
     <TextView
         android:id="@+id/textView19"
@@ -24,17 +36,18 @@
         android:textSize="24dp"
         app:layout_constraintBottom_toTopOf="@+id/hzsvCate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cldMain" />
+        app:layout_constraintTop_toBottomOf="@+id/cldMain"
+        app:layout_constraintVertical_bias="0.0" />
 
     <HorizontalScrollView
         android:id="@+id/hzsvCate"
         android:layout_width="343dp"
         android:layout_height="41dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="56dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.088"
+        app:layout_constraintHorizontal_bias="0.235"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cldMain">
 
@@ -51,36 +64,37 @@
         android:id="@+id/btnUserListCate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="7dp"
+        android:layout_marginRight="68dp"
         android:text="List Cate"
-        app:layout_constraintEnd_toStartOf="@+id/fltUserAddCateButton"
-        app:layout_constraintTop_toBottomOf="@+id/hzsvCate" />
+        app:layout_constraintRight_toRightOf="@id/fltUserAddCateButton"
+        app:layout_constraintTop_toBottomOf="@+id/txtSelectedTime" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fltUserAddCateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="248dp"
         android:clickable="true"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.909"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintRight_toLeftOf="@id/btnUserListCate"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hzsvCate"
-        app:layout_constraintVertical_bias="0.32"
-        app:srcCompat="@drawable/baseline_add_24"
-        app:useCompatPadding="false" />
+        app:layout_constraintTop_toBottomOf="@id/txtSelectedTime"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/baseline_add_24" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvItemTaskUser"
         android:layout_width="293dp"
         android:layout_height="161dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="44dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.254"
+        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -98,11 +112,11 @@
         android:id="@+id/fltUserAddTaskButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="4dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.926"
+        app:layout_constraintHorizontal_bias="0.954"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/baseline_add_24" />
 
@@ -110,7 +124,7 @@
         android:id="@+id/txtSelectedTime"
         android:layout_width="190dp"
         android:layout_height="32dp"
-        android:layout_marginTop="304dp"
+        android:layout_marginTop="324dp"
         android:layout_marginEnd="16dp"
         android:text="TextView"
         android:textSize="18dp"
@@ -123,13 +137,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/button_background"
         android:text="History"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-
 
 
     <!-- Số cột tùy ý, ví dụ: 7 cột cho lịch tuần -->

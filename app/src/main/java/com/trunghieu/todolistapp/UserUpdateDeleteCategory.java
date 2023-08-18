@@ -1,46 +1,41 @@
 package com.trunghieu.todolistapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.trunghieu.todolistapp.adapter.CategoryAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.trunghieu.todolistapp.data.DBHelper;
 import com.trunghieu.todolistapp.model.Category;
-import com.trunghieu.todolistapp.model.User;
 
-public class DetailCategoryActivity extends AppCompatActivity {
-
-    private Button btnDelete, btnUpdate, btnBackDetailCate;
+public class UserUpdateDeleteCategory extends AppCompatActivity {
+    private Button btnDelete, btnUpdate, btnBackUpdateDeleteCategory;
     private EditText edtName, edtDescription;
     String categoryId;
     DBHelper dbHelper;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_category);
-        edtName = findViewById(R.id.admin_detail_edtNameCategory);
-        edtDescription = findViewById(R.id.admin_detail_edtDescCategory);
-        btnDelete = findViewById(R.id.button_delete_category);
-        btnUpdate = findViewById(R.id.button_update_category);
-        btnBackDetailCate = findViewById(R.id.btnBackDetailCate);
-        btnBackDetailCate.setOnClickListener(new View.OnClickListener() {
+        setContentView(R.layout.activity_user_detail_category);
+        btnBackUpdateDeleteCategory = findViewById(R.id.btnBackUpdateDeleteCate);
+        btnBackUpdateDeleteCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        edtName = findViewById(R.id.admin_user_detail_edtNameCategory);
+        edtDescription = findViewById(R.id.admin_user_detail_edtDescCategory);
+        btnDelete = findViewById(R.id.button_user_delete_category);
+        btnUpdate = findViewById(R.id.button_user_update_category);
+
         dbHelper = new DBHelper(this);
 
         categoryId = getIntent().getStringExtra("id");
-
         Category currentCategory = dbHelper.getCategoryByID(categoryId);
         if(currentCategory != null){
             edtName.setText(currentCategory.getName());
@@ -64,7 +59,8 @@ public class DetailCategoryActivity extends AppCompatActivity {
 
         if (isDeleted) {
             Toast.makeText(this, "Danh mục đã được xóa ", Toast.LENGTH_SHORT).show();
-
+            Intent intent = new Intent(UserUpdateDeleteCategory.this, UserActivity.class);
+            startActivity(intent);
             finish();
         } else {
             Toast.makeText(this, "Có lỗi xảy ra khi xóa danh mục.", Toast.LENGTH_SHORT).show();
@@ -81,7 +77,7 @@ public class DetailCategoryActivity extends AppCompatActivity {
         boolean isUpdated = dbHelper.updateCategoryByID(id, updatedCategory);
 
         if (isUpdated) {
-            Intent resultIntent = new Intent();
+            Intent resultIntent = new Intent(UserUpdateDeleteCategory.this, UserActivity.class);
             resultIntent.putExtra("updatedUser", updatedCategory);
             setResult(RESULT_OK, resultIntent);
             finish();
@@ -91,8 +87,4 @@ public class DetailCategoryActivity extends AppCompatActivity {
         }
     }
 
-
 }
-
-
-

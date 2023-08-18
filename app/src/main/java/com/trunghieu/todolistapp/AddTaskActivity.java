@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.trunghieu.todolistapp.data.DBHelper;
+import com.trunghieu.todolistapp.model.Audio;
 import com.trunghieu.todolistapp.model.Category;
 import com.trunghieu.todolistapp.model.Task;
 import com.trunghieu.todolistapp.model.User;
@@ -32,15 +33,22 @@ public class AddTaskActivity extends AppCompatActivity {
     private EditText edtTitleAdd;
     private EditText edtDesAdd;
     private TextView txtStartAdd;
-    private Spinner spnCateAdd;
+    private Spinner spnCateAdd, spnListAudio;
     private String[] items;
     private DBHelper dbHelper;
     private Calendar calendar;
     private ArrayList<Category> listCate;
+    private ArrayList<Audio> listAudio;
     private Category selectedCate;
-    private Button btnAddTaskDetail;
+    private Audio selectedAudio;
+    private Button btnAddTaskDetail, btnUserUploadAudio;
     private User userLogin;
+
+    private Audio userLogin1;
+
+
     private Button btnBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +59,13 @@ public class AddTaskActivity extends AppCompatActivity {
         edtDesAdd = (EditText) findViewById(R.id.txtDesAdd);
         txtStartAdd = (TextView) findViewById(R.id.txtStartAdd);
         spnCateAdd = (Spinner) findViewById(R.id.spnCateAdd);
+        spnListAudio = (Spinner) findViewById(R.id.spnListAudio);
         calendar = Calendar.getInstance();
         btnAddTaskDetail = (Button) findViewById(R.id.btnAddTaskDetail);
+
+        //btn upload audio
+        btnUserUploadAudio = (Button) findViewById(R.id.btn_UserUploadAudio);
+
         btnBack = findViewById(R.id.btnBack6);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +73,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         txtStartAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,13 +97,39 @@ public class AddTaskActivity extends AppCompatActivity {
             spnCateAdd.setAdapter(arrayAdapter);
             setUpSpinnerCate();
         }
+        //
+        dbHelper = new DBHelper(this);
+        listAudio = dbHelper.getAudioData();
+        SharedPreferences providerAudio = getSharedPreferences("session", MODE_PRIVATE);
+        userLogin1 = dbHelper.getAudioByID(String.valueOf(providerAudio.getInt("audio-id", -1)));
+
+        if(!listAudio.isEmpty()){
+            items = new String[listAudio.size()];
+            int i = 0;
+            for (Audio audio: listAudio) {
+                items[i++] = audio.getName();
+            }
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spnListAudio.setAdapter(arrayAdapter);
+            setUpSpinnerListAudio();
+
+        }
+        //xu ly su kien click nut upload
+        btnUserUploadAudio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AddTaskActivity.this, ReAddAudioActivity.class);
+                startActivity(intent);
+            }
+        });
         btnAddTaskDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String status = addTask();
                 Toast.makeText(AddTaskActivity.this, status, Toast.LENGTH_LONG).show();
                 Intent intent = getIntent();
-                Bundle bundle = intent.getExtras();
+                Bundle bundle = new Bundle();
                 bundle.putString("status",status);
                 intent.putExtras(bundle);
                 setResult(Activity.RESULT_OK, intent);
@@ -110,7 +150,27 @@ public class AddTaskActivity extends AppCompatActivity {
             }
         });
     }
+    //
+    private void setUpSpinnerListAudio() {
+        spnListAudio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedAudio = listAudio.get(position);
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+    }
+    private boolean checkDuplicateTaskName(String title) {
+        // Truy vấn cơ sở dữ liệu để kiểm tra task có cùng tên không
+        boolean isDuplicate = dbHelper.checkTitleExists(title);
+
+        return isDuplicate;
+    }
     public String addTask() {
         String title = edtTitleAdd.getText().toString();
         String description = edtDesAdd.getText().toString();
@@ -118,6 +178,9 @@ public class AddTaskActivity extends AppCompatActivity {
         int userId =
                 userLogin.getId();
         String cateId = selectedCate.getId();
+        if (checkDuplicateTaskName(title)) {
+            return "Task with the same name already exists!";
+        }
         if (TextUtils.isEmpty(title)) {
             edtTitleAdd.setBackgroundResource(R.drawable.border_red);
             return "Input title, please!";

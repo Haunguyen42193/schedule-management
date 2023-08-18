@@ -10,10 +10,13 @@ public class Notification {
     private String content;
     private String taskId;
 
-    public Notification(String content, String taskId) {
+    private String filePath;
+
+    public Notification(String content, String taskId, String filePath) {
         this.id = UUID.randomUUID().toString();
         this.content = content;
         this.taskId = taskId;
+        this.filePath = filePath;
     }
 
     public String getId() {
@@ -34,5 +37,10 @@ public class Notification {
 
     public void setTaskId(String taskId) {
         this.taskId = taskId;
+    }
+
+    public String getFilePath() {return filePath;
+    }
+    public void setFilePath(String filePath) {this.filePath = filePath;
     }
 }

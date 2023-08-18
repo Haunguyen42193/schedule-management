@@ -1,5 +1,6 @@
 package com.trunghieu.todolistapp.data;
 
+import static com.trunghieu.todolistapp.data.AudioTable.TABLE_NAME;
 import static com.trunghieu.todolistapp.data.TaskTable.TABLE_TASKS;
 
 public class NotificationTable {
@@ -13,6 +14,6 @@ public class NotificationTable {
             COLUMN_CONTENT + " TEXT NOT NULL, " +
             COLUMN_TASK_ID + " TEXT NOT NULL, " +
             "FOREIGN KEY ( " + COLUMN_TASK_ID + " ) REFERENCES " +
-            TABLE_TASKS + " ( " + TaskTable.COLUMN_ID + " ))";
+            TABLE_TASKS + " ( " + TaskTable.COLUMN_ID + " ))" ;
     public static String DROP_TABLE_NOTIFICATION = "DROP TABLE IF EXISTS " + TABLE_NOTIFICATION;
 }

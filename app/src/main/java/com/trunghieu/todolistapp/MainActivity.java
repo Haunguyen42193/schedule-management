@@ -11,6 +11,7 @@ import android.widget.Button;
 import com.trunghieu.todolistapp.data.DBHelper;
 import com.trunghieu.todolistapp.model.Category;
 import com.trunghieu.todolistapp.model.Task;
+import com.trunghieu.todolistapp.model.User;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dbHelper = new DBHelper(this);
+        //dbHelper.insertUser(new User("m", "m@gmail.com", "123456", 2));
 //        dbHelper.insertTask(new Task("Do exercise", "done", "02/08/2023 06:00:00", "02/08/2023 06:30:00", 1, null));
 //        dbHelper.insertTask(new Task("Do exercise", "squad", "03/08/2023 06:30:00", null, 1, null));
 //        dbHelper.insertCategory(new Category("Work", "Some things to do in your work"));

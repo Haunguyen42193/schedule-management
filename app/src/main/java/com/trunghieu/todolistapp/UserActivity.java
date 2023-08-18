@@ -4,16 +4,26 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.SparseBooleanArray;
@@ -31,10 +41,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.trunghieu.todolistapp.adapter.TaskAdapter;
 import com.trunghieu.todolistapp.adapter.TaskUserAdapter;
 import com.trunghieu.todolistapp.data.DBHelper;
+import com.trunghieu.todolistapp.model.Audio;
 import com.trunghieu.todolistapp.model.Category;
 import com.trunghieu.todolistapp.model.Task;
 import com.trunghieu.todolistapp.model.User;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,25 +59,29 @@ public class UserActivity extends AppCompatActivity{
     private DBHelper dbHelper;
     private LinearLayout linearCate;
     private ArrayList<Button> listButton;
+
+    private ArrayList<Audio> listAudio;
     private ArrayList<Category> listCate;
     private TaskUserAdapter taskUserAdapter;
     private ArrayList<Task> listTask;
+    private Task task;
     private String userName;
     private RecyclerView rvItemTaskUser;
     private TextView txtNoticeUser;
     private User userLogin;
     private TextView txtSelectedTime;
     private Calendar calendar;
-    private FloatingActionButton fltUserAddTaskButton;
+    private FloatingActionButton fltUserAddTaskButton, fltUserAddCateButton;
     private ActivityResultLauncher<Intent> launcher;
-    private Button btnHistory;
+    private Button btnHistory, btnUserListCate;
+    private MediaPlayer mediaPlayer;
+
 
     @SuppressLint({"MissingInflatedId", "ResourceType", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-
         dbHelper = new DBHelper(this);
         //Lấy ra user đang đăng nhập
         SharedPreferences preferences = getSharedPreferences("session", MODE_PRIVATE);
@@ -74,11 +91,14 @@ public class UserActivity extends AppCompatActivity{
         }
 
         //Lấy các phần tử
+
         cldMain = (CalendarView) findViewById(R.id.cldMain);
         linearCate = (LinearLayout) findViewById(R.id.linearCate);
         rvItemTaskUser = (RecyclerView) findViewById(R.id.rvItemTaskUser);
         listCate = new ArrayList<>();
         listButton = new ArrayList<>();
+        //lấy danh sách audio
+        listAudio = dbHelper.getAudioData();
         listCate = dbHelper.getCategoriesData();
         listTask = new ArrayList<>();
         listTask = dbHelper.getTaskData(userLogin.getEmail());
@@ -88,8 +108,11 @@ public class UserActivity extends AppCompatActivity{
         txtSelectedTime = (TextView) findViewById(R.id.txtSelectedTime);
         calendar = Calendar.getInstance();
         fltUserAddTaskButton = (FloatingActionButton) findViewById(R.id.fltUserAddTaskButton);
-        btnHistory = (Button) findViewById(R.id.btnHistory);
 
+        //tìm id addcatebutton
+        fltUserAddCateButton = (FloatingActionButton) findViewById(R.id.fltUserAddCateButton);
+        btnHistory = (Button) findViewById(R.id.btnHistory);
+        btnUserListCate = (Button) findViewById(R.id.btnUserListCate);
         if(!listTask.isEmpty()) {
             rvItemTaskUser.setVisibility(View.VISIBLE);
             txtNoticeUser.setVisibility(View.GONE);
@@ -127,6 +150,7 @@ public class UserActivity extends AppCompatActivity{
         setOnClickRecyclerView();
 
         newButtonCate();
+        //chọn tg
         txtSelectedTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,6 +181,27 @@ public class UserActivity extends AppCompatActivity{
                     Intent intent = new Intent(UserActivity.this, AddTaskActivity.class);
                     startActivity(intent);
                 }
+            }
+        });
+        //user add category
+        fltUserAddCateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(fltUserAddCateButton.getId() == v.getId()){
+                    Intent intent = new Intent(UserActivity.this,UserAddCategoryActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+        //user list cate
+        btnUserListCate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(UserActivity.this, UserDetailCategoryActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("user-mail", userLogin.getEmail());
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
         btnHistory.setOnClickListener(new View.OnClickListener() {
@@ -233,7 +278,7 @@ public class UserActivity extends AppCompatActivity{
     public void updateListOnListener(Date date) {
         listTask = dbHelper.getTaskData(userLogin.getEmail());
         ArrayList<Task> newListTask = new ArrayList<>();
-        for(Task task:listTask) {
+            for(Task task:listTask) {
             try {
                 Date taskDate = Utils.sdf.parse(task.getStartTime());
                 if(isSameDay(date, taskDate)) {
@@ -309,4 +354,16 @@ public class UserActivity extends AppCompatActivity{
             }
         });
     }
+    private void checkTaskDeadline(Audio audio) throws ParseException {
+        // Kiểm tra thời gian đến hạn của task
+        long taskDeadline = Utils.sdf.parse(task.getStartTime()).getTime()/1000;
+        if (taskDeadline <= System.currentTimeMillis()) {
+            // Tạo đối tượng Audio đại diện cho âm thanh thông báo
+            //Intent intent = new Intent(this, NotificationReceiver.class);
+            //intent.putExtra("audio_name", audio.getName());
+
+            // Gọi phương thức scheduleAlarmForTask() trong AudioNotificationHelper
+        }
+    }
+
 }

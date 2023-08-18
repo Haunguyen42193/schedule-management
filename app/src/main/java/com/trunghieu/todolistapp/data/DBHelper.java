@@ -142,6 +142,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return t;
     }
 
+
     public ArrayList<Task> getTaskByCategoryIdUserId(String cateId, int uId) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(TaskTable.TABLE_TASKS,
@@ -524,5 +525,29 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return list;
+    }
+    public boolean checkTitleExists(String title) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        boolean exists = false;
+
+        try {
+            // Query the database to check if the title exists
+            String query = "SELECT * FROM " + TaskTable.TABLE_TASKS + " WHERE " + TaskTable.COLUMN_TASK_TITLE + " = ?";
+            cursor = db.rawQuery(query, new String[]{title});
+
+            // If the cursor has any rows, it means the title exists
+            if (cursor != null && cursor.getCount() > 0) {
+                exists = true;
+            }
+        } finally {
+            // Close the cursor and database connection
+            if (cursor != null) {
+                cursor.close();
+            }
+            db.close();
+        }
+
+        return exists;
     }
 }

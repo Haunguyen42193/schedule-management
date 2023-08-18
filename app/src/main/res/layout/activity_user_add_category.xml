@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserAddCategoryActivity">
+
+
+    <TextView
+        android:id="@+id/tvUserAddCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/alata"
+        android:text="Add Category"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:flow_horizontalAlign="center"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="80dp" />
+
+
+    <TextView
+        android:id="@+id/tvUserAddCategory_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="95dp"
+        android:fontFamily="@font/alata"
+        android:text="Name"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.117"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserAddCategory" />
+
+    <EditText
+        android:id="@+id/edtUserAddCategory_Name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginRight="20dp"
+
+        android:background="@drawable/edittext_bg_login"
+        android:ems="10"
+        android:fontFamily="@font/alata"
+        android:inputType="text"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserAddCategory_Name" />
+
+    <TextView
+        android:id="@+id/tvUserAddCategory_Description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="95dp"
+        android:fontFamily="@font/alata"
+        android:text="Description"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtUserAddCategory_Name" />
+
+    <EditText
+        android:id="@+id/edtUserAddCategory_Description"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="56dp"
+        android:background="@drawable/edittext_bg_login"
+        android:ems="10"
+        android:fontFamily="@font/alata"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUserAddCategory_Description" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/admin_userAddCategory_btn"
+
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/orange_button_into"
+        android:text="Add"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edtUserAddCategory_Description"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

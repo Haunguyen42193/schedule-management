@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="cldMain" type="id" />
+    <item name="hzsvCate" type="id" />
+    <item name="linearCate" type="id" />
+    <item name="rvItemTaskUser" type="id" />
+    <item name="txtNoticeUser" type="id" />
+    <item name="fltUserAddTaskButton" type="id" />
+    <item name="txtSelectedTime" type="id" />
+    <item name="btnHistory" type="id" />
+    <item name="textView19" type="id" />
+</resources>

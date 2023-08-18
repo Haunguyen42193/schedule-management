@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/material_dynamic_primary80"
     tools:context=".UserActivity">
 
     <CalendarView
         android:id="@+id/cldMain"
-        android:layout_width="410dp"
-        android:layout_height="336dp"
+        android:layout_width="346dp"
+        android:layout_height="301dp"
         android:dateTextAppearance="@style/CalendarTextStyle"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="-1dp" />
+        tools:layout_editor_absoluteX="18dp" />
 
     <TextView
         android:id="@+id/textView19"
@@ -48,14 +47,40 @@
             tools:layout_editor_absoluteY="396dp" />
     </HorizontalScrollView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvItemTaskUser"
-        android:layout_width="344dp"
-        android:layout_height="199dp"
-        android:layout_marginBottom="32dp"
+    <Button
+        android:id="@+id/btnUserListCate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="7dp"
+        android:text="List Cate"
+        app:layout_constraintEnd_toStartOf="@+id/fltUserAddCateButton"
+        app:layout_constraintTop_toBottomOf="@+id/hzsvCate" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fltUserAddCateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="200dp"
+        android:clickable="true"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintHorizontal_bias="0.909"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hzsvCate"
+        app:layout_constraintVertical_bias="0.32"
+        app:srcCompat="@drawable/baseline_add_24"
+        app:useCompatPadding="false" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvItemTaskUser"
+        android:layout_width="293dp"
+        android:layout_height="161dp"
+        android:layout_marginBottom="64dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.254"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -67,7 +92,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hzsvCate" />
+        app:layout_constraintTop_toBottomOf="@+id/fltUserAddCateButton" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fltUserAddTaskButton"
@@ -103,6 +128,9 @@
         android:text="History"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+
 
     <!-- Số cột tùy ý, ví dụ: 7 cột cho lịch tuần -->
 

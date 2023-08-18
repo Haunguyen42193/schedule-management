@@ -34,9 +34,11 @@ public class ReAddTaskActivity extends AppCompatActivity {
     private String[] items;
     private DBHelper dbHelper;
     private Calendar calendar;
+
+    private ArrayList<Task> arrayListTask;
     private ArrayList<Category> listCate;
     private Category selectedCate;
-    private Button btnReAddTaskDetail;
+    private Button btnReAddTaskDetail, btnUserUploadAudio;
     private User userLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,8 @@ public class ReAddTaskActivity extends AppCompatActivity {
         edtDesReAdd = (EditText) findViewById(R.id.txtDesReAdd);
         txtStartReAdd = (TextView) findViewById(R.id.txtStartReAdd);
         spnCateReAdd = (Spinner) findViewById(R.id.spnCateReAdd);
+        //btn upload audio
+        btnUserUploadAudio = (Button) findViewById(R.id.btn_UserUploadAudio);
         calendar = Calendar.getInstance();
         btnReAddTaskDetail = (Button) findViewById(R.id.btnReAddTaskDetail);
         SharedPreferences preferences = getSharedPreferences("session", MODE_PRIVATE);
@@ -95,7 +99,14 @@ public class ReAddTaskActivity extends AppCompatActivity {
             spnCateReAdd.setSelection(position);
             setUpSpinnerCate();
         }
-
+        //xu ly su kien click nut upload
+        btnUserUploadAudio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ReAddTaskActivity.this, AddAudioActivity.class);
+                startActivity(intent);
+            }
+        });
         //Sự kiện click vào nút add
         btnReAddTaskDetail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,12 +132,17 @@ public class ReAddTaskActivity extends AppCompatActivity {
         });
     }
 
-    public String addTask() {
+        public String addTask() {
         String title = edtTitleReAdd.getText().toString();
         String description = edtDesReAdd.getText().toString();
         String startDate = txtStartReAdd.getText().toString();
         int userId = userLogin.getId();
         String cateId = selectedCate.getId();
+
+        boolean checkTitleExists = dbHelper.checkTitleExists(title);
+        if (checkTitleExists){
+            return "Title  already exists please enter another title";
+        }
         if (TextUtils.isEmpty(title)) {
             edtTitleReAdd.setBackgroundResource(R.drawable.border_red);
             return "Input title, please!";
@@ -151,7 +167,9 @@ public class ReAddTaskActivity extends AppCompatActivity {
         }
         boolean insertState = dbHelper.insertTask(new Task(title, description, startDate, null, userId, cateId));
 
-        if (insertState) return "Add successfully!!";
-        else return "Add failed!!!";
+      if (insertState) return "Add successfully!!";
+
+      else return "Add failed!!!";
+
     }
 }

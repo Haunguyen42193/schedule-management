@@ -174,10 +174,11 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:fontFamily="@font/alata"
+                    android:layout_marginLeft="10dp"
                     android:id="@+id/txtVUploadAudio"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/alata"
                     android:padding="3sp"
                     android:shadowColor="@color/black"
                     android:text="List Audio"

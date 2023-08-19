@@ -14,7 +14,7 @@ import com.trunghieu.todolistapp.model.User;
 
 public class AddUserActivity extends AppCompatActivity {
         private EditText edtName, edtEmail, edtPass, edtRole;
-        private Button addButton;
+        private Button addButton, btnBack;
         private DBHelper dbHelper;
 
         @Override
@@ -27,6 +27,7 @@ public class AddUserActivity extends AppCompatActivity {
             edtPass = findViewById(R.id.admin_add_edtPass);
             edtRole = findViewById(R.id.admin_add_role);
             addButton = findViewById(R.id.admin_addUser_btn);
+            btnBack = findViewById(R.id.btnBackAddUser);
             dbHelper = new DBHelper(this);
             addButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -57,6 +58,12 @@ public class AddUserActivity extends AppCompatActivity {
                             Toast.makeText(AddUserActivity.this, "Có lỗi xảy ra khi thêm người dùng", Toast.LENGTH_SHORT).show();
                         }
                     }
+                }
+            });
+            btnBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
                 }
             });
     }

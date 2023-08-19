@@ -16,7 +16,7 @@ public class DetailUserActivity extends AppCompatActivity {
         EditText edtName, edtEmail, edtPass, edtRole;
         DBHelper dbHelper;
         String userEmail;
-        Button btnUpdate, btnDelete;
+        Button btnUpdate, btnDelete, btnBack;
 
 
 
@@ -31,6 +31,7 @@ public class DetailUserActivity extends AppCompatActivity {
             btnUpdate = findViewById(R.id.button_update_user);
             btnDelete = findViewById(R.id.button_delete_user);
             dbHelper = new DBHelper(this);
+            btnBack = findViewById(R.id.btnBackDetailUser);
 
             // Get the user's email from the Intent
             userEmail = getIntent().getStringExtra("email");
@@ -58,7 +59,14 @@ public class DetailUserActivity extends AppCompatActivity {
                     onDeleteClicked(v);
                 }
             });
+            btnBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
         }
+
         public void onUpdateClicked(View view) {
             String name = edtName.getText().toString();
             String email = edtEmail.getText().toString();

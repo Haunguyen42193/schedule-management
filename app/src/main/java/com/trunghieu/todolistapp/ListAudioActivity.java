@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,6 +29,7 @@ public class ListAudioActivity extends AppCompatActivity {
     private ArrayList<Audio> arrayList;
     private ArrayList<Audio> originalList;
     FloatingActionButton floatingActionButton;
+    Button btnBack;
     androidx.appcompat.widget.SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class ListAudioActivity extends AppCompatActivity {
         searchView= findViewById(R.id.search_audio);
         dbHelper = new DBHelper(this);
         recyclerView = findViewById(R.id.recyclerViewAudio);
+        btnBack = findViewById(R.id.btnBackListAudio);
         floatingActionButton = findViewById(R.id.add_buttonAudio);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(audioAdapter);
@@ -43,6 +46,13 @@ public class ListAudioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListAudioActivity.this, AddAudioActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), AdminActivity.class);
                 startActivity(intent);
             }
         });

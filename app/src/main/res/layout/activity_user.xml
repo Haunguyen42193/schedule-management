@@ -9,6 +9,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnBack3"
         android:layout_width="86dp"
+        android:background="@color/white"
         android:layout_height="44dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="4dp"
@@ -18,7 +19,7 @@
 
     <CalendarView
         android:id="@+id/cldMain"
-        android:layout_width="413dp"
+        android:layout_width="match_parent"
         android:layout_height="334dp"
         android:layout_marginTop="20dp"
         android:dateTextAppearance="@style/CalendarTextStyle"
@@ -60,8 +61,9 @@
             tools:layout_editor_absoluteY="396dp" />
     </HorizontalScrollView>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnUserListCate"
+        android:background="@color/blue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="68dp"

@@ -19,7 +19,7 @@ import com.trunghieu.todolistapp.model.Audio;
 import com.trunghieu.todolistapp.model.Category;
 
 public class DetailAudioActivity extends AppCompatActivity {
-    private Button btnDelete, btnUpdate, btnChoiceFile;
+    private Button btnDelete, btnUpdate, btnChoiceFile,btnBack;
     private EditText edtName, edtFilePath;
     DBHelper dbHelper;
     ActivityResultLauncher<String> pickAudioLauncher;
@@ -35,6 +35,7 @@ public class DetailAudioActivity extends AppCompatActivity {
         btnDelete = findViewById(R.id.button_delete_audio);
         btnUpdate = findViewById(R.id.button_update_audio);
         btnChoiceFile = findViewById(R.id.btn_ChoiceAudioFile);
+        btnBack = findViewById(R.id.btnBackDetaiAudio);
         dbHelper = new DBHelper(this);
         String audioId = getIntent().getStringExtra("id");
         Audio currentAudio = dbHelper.getAudioByID(audioId);
@@ -65,6 +66,13 @@ public class DetailAudioActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 onUpdateClicked(v, audioId);
+            }
+        });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+
             }
         });
 

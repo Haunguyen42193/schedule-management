@@ -8,13 +8,14 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnBack2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
         android:text="Back"
+        android:background="@mipmap/bgt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/imageView7"
@@ -151,7 +152,6 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="276dp"
         android:fontFamily="@font/alata"
         android:text="SignUp"
         android:textColor="@color/black"
@@ -159,7 +159,8 @@
 
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout1"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.444" />
+        app:layout_constraintVertical_bias="0.48" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,6 @@ public class TaskTable {
     public static final String COLUMN_START = "startTime";
     public static final String COLUMN_COMPLETE = "completed";
     public static final String COLUMN_USER = "userId";
-
     public static final  String COLUMN_CATEGORY ="categoryId";
     public static String CREATE_TABLE_TASK =
             "CREATE TABLE " + TABLE_TASKS + " ( "

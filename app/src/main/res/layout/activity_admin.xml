@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/background_page"
+    android:background="@mipmap/bgt"
     tools:context=".AdminActivity">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnBack8"
         android:layout_width="86dp"
+        android:background="@mipmap/bgt"
         android:layout_height="44dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="4dp"
@@ -27,6 +28,8 @@
         tools:ignore="MissingConstraints">
 
         <TextView
+           android:textStyle="bold"
+            android:fontFamily="@font/alata"
             android:id="@+id/txtAdminName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,7 +38,9 @@
             android:textColor="@android:color/holo_red_dark"
             android:textSize="40sp" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
+            android:textColor="@color/white"
+            android:fontFamily="@font/alata"
             android:id="@+id/btnUserActivity"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -44,31 +49,34 @@
             android:text="User"
             android:textAlignment="center" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnTaskActivity"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40sp"
             android:background="@drawable/orange_button_into"
             android:text="Task"
+            android:textColor="@color/white"
             android:textAlignment="center" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnCategoryActivity"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40sp"
             android:background="@drawable/orange_button_into"
             android:text="Category"
+            android:textColor="@color/white"
             android:textAlignment="center" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnNotificationActivity"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="40sp"
             android:background="@drawable/orange_button_into"
             android:text="Audio"
+            android:textColor="@color/white"
             android:textAlignment="center" />
 
     </LinearLayout>

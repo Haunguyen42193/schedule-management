@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
+
         android:layout_width="412dp"
         android:layout_height="669dp"
         android:layout_marginStart="1dp"
@@ -41,6 +42,7 @@
             android:textStyle="bold" />
 
         <TextView
+            android:fontFamily="@font/alata"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -52,6 +54,7 @@
             android:textSize="20dp" />
 
         <EditText
+            android:fontFamily="@font/alata"
             android:id="@+id/txtTitleAdd"
             android:layout_width="380sp"
             android:layout_height="38dp"
@@ -59,10 +62,12 @@
             android:layout_marginRight="10sp"
             android:background="@drawable/border"
             android:ems="10"
+            android:padding="10dp"
             android:hint="Add your task title here"
             android:inputType="text" />
 
         <TextView
+            android:fontFamily="@font/alata"
             android:layout_width="400sp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -74,6 +79,7 @@
             android:textSize="20dp" />
 
         <EditText
+            android:fontFamily="@font/alata"
             android:id="@+id/txtDesAdd"
             android:layout_width="380sp"
             android:layout_height="120dp"
@@ -81,6 +87,7 @@
             android:layout_marginRight="10sp"
             android:background="@drawable/border"
             android:ems="10"
+            android:padding="10dp"
             android:gravity="start|top"
             android:hint="Add your task description here"
             android:inputType="textMultiLine"
@@ -99,6 +106,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:fontFamily="@font/alata"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -110,6 +118,7 @@
                     android:textSize="20dp" />
 
                 <TextView
+                    android:fontFamily="@font/alata"
                     android:id="@+id/txtStartAdd"
                     android:layout_width="177sp"
                     android:layout_height="38sp"
@@ -117,6 +126,7 @@
                     android:background="@drawable/border"
                     android:paddingLeft="5sp"
                     android:paddingTop="5sp"
+                    android:padding="5dp"
                     android:text="Click to set start"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
@@ -129,6 +139,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:fontFamily="@font/alata"
                     android:id="@+id/textView18"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -141,10 +152,12 @@
                     android:textSize="20dp" />
 
                 <Spinner
+                    android:fontFamily="@font/alata"
                     android:id="@+id/spnCateAdd"
                     android:layout_width="185dp"
                     android:layout_height="38sp"
-                    android:background="@drawable/border" />
+                    android:background="@drawable/border"
+                    android:padding="5dp"/>
 
             </LinearLayout>
 
@@ -161,6 +174,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:fontFamily="@font/alata"
                     android:id="@+id/txtVUploadAudio"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
@@ -173,11 +187,14 @@
                     tools:layout_editor_absoluteY="15dp" />
 
                 <Spinner
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/alata"
                     android:id="@+id/spnListAudio"
-                    android:layout_width="185dp"
+                    android:layout_width="170dp"
                     android:layout_height="38sp"
                     android:background="@drawable/border"
                     android:paddingLeft="5dp"
+                    android:padding="5dp"
                     tools:layout_editor_absoluteX="3dp"
                     tools:layout_editor_absoluteY="49dp" />
 
@@ -189,6 +206,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:fontFamily="@font/alata"
                     android:id="@+id/txtVUploadAudio2"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
@@ -199,10 +217,13 @@
                     android:textSize="20dp"
                     />
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
+                    android:fontFamily="@font/alata"
                     android:id="@+id/btn_UserUploadAudio"
                     android:layout_width="match_parent"
+                   android:layout_marginLeft="10dp"
                     android:layout_height="wrap_content"
+                    android:background="@color/blue"
                     android:text="upload" />
             </LinearLayout>
         </LinearLayout>
@@ -211,7 +232,7 @@
             android:layout_width="match_parent"
             android:layout_height="186dp">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnAddTaskDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -222,7 +243,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.311" />
+                app:layout_constraintVertical_bias="0.217" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>

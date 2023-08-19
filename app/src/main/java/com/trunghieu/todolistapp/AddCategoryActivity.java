@@ -14,7 +14,7 @@ import com.trunghieu.todolistapp.model.Category;
 public class AddCategoryActivity extends AppCompatActivity {
 
     private EditText edtName,  edtDescription;
-    private Button addButton;
+    private Button addButton ,btnBack;
     private DBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,7 @@ public class AddCategoryActivity extends AppCompatActivity {
         edtName = findViewById(R.id.edtAddCategory_Name);
         edtDescription = findViewById(R.id.edtAddCategory_Description);
         addButton = findViewById(R.id.admin_addCategory_btn);
+        btnBack = findViewById(R.id.btnBackCate);
         dbHelper = new DBHelper(this);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +43,12 @@ public class AddCategoryActivity extends AppCompatActivity {
 
                     Toast.makeText(AddCategoryActivity.this, "Có lỗi xảy ra khi thêm danh mục", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

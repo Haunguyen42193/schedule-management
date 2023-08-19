@@ -5,6 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnBackListUser"
+        android:layout_width="120dp"
+        android:layout_height="20dp"
+        android:layout_alignBottom="@+id/textListUser"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="31dp"
+        android:background="@color/white"
+        android:text="Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textListUser"

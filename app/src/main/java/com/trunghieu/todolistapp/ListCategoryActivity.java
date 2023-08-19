@@ -9,6 +9,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 
 public class ListCategoryActivity extends AppCompatActivity {
     private DBHelper dbHelper;
+    private Button btnBack;
     private RecyclerView recyclerView;
     private ArrayList<Category> arrayList;
     private ArrayList<Category> originalList;
@@ -39,6 +41,13 @@ public class ListCategoryActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         addButton = findViewById(R.id.add_buttonCategory);
+        btnBack = findViewById(R.id.btnBackListCate);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

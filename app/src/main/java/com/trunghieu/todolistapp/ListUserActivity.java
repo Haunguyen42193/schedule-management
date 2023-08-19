@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ public class ListUserActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     ArrayList<User> arrayList;
     UserAdapter adapter;
+    Button btnBack;
     private FloatingActionButton addButton;
     private ArrayList<User> originalList;
     androidx.appcompat.widget.SearchView searchView;
@@ -33,6 +35,7 @@ public class ListUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_user);
         searchView = findViewById(R.id.search_user);
+        btnBack= findViewById(R.id.btnBackListUser);
         dbHelper = new DBHelper(this);
         recyclerView = findViewById(R.id.recyclerView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -50,7 +53,12 @@ public class ListUserActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         searchView.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override

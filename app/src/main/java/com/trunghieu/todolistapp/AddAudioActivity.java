@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,7 +30,7 @@ public class AddAudioActivity extends AppCompatActivity {
     private String selectedAudioFilePath;
     EditText edtName;
     EditText edtFilePath;
-    Button addButton, selectButton;
+    Button addButton, selectButton, backButton;
     ActivityResultLauncher<String> pickAudioLauncher;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class AddAudioActivity extends AppCompatActivity {
         edtName = findViewById(R.id.admin_add_edtNameAudio);
         edtFilePath= findViewById(R.id.admin_add_edtFileAudio);
         addButton = findViewById(R.id.button_add_audio);
-
+        backButton= findViewById(R.id.btnBackAddAudio);
         selectButton = findViewById(R.id.btn_ChoiceAudioFile);
         pickAudioLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(),
                 new ActivityResultCallback<Uri>() {
@@ -54,6 +55,12 @@ public class AddAudioActivity extends AppCompatActivity {
                 });
         selectButton.setOnClickListener(v -> pickAudioFile());
         addButton.setOnClickListener(v -> saveAudioToDatabase());
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
     private void pickAudioFile() {
         pickAudioLauncher.launch("audio/*");

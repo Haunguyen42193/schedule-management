@@ -33,6 +33,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSort"
+        android:fontFamily="@font/alata"
         android:layout_width="117dp"
         android:layout_height="48dp"
         android:background="@drawable/button_background"
@@ -58,11 +59,12 @@
             android:orientation="vertical">
 
             <TextView
+                android:fontFamily="@font/alata"
                 android:id="@+id/textView21"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
-                android:text="Stt\t\t\t\t\tTitle\t\t\t\t\t\t\t\t\t\tStart\t\t\t\t\t\t\t\t\t\t\t\t\t\t\tComplete"
+                android:text="Stt\t\t\t\t\tTitle\t\t\t\t\t\t\t\t\t\tStart\t\t\t\t\t\t\t\t\t\t\t\tComplete"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
         </LinearLayout>

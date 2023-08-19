@@ -18,6 +18,7 @@
             android:background="@drawable/border">
 
             <TextView
+                android:fontFamily="@font/alata"
                 android:id="@+id/txtSttTaskAdmin"
                 android:layout_width="57dp"
                 android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:fontFamily="@font/alata"
                 android:id="@+id/txtTaskItemTitleAdmin"
                 android:layout_width="255dp"
                 android:layout_height="wrap_content"

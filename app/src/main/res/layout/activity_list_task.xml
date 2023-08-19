@@ -31,7 +31,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayout3"
-            android:layout_width="409dp"
+            android:layout_width="match_parent"
             android:layout_height="657dp"
             android:orientation="vertical"
             tools:layout_editor_absoluteX="1dp"
@@ -49,6 +49,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:fontFamily="@font/alata"
                     android:id="@+id/textView17"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -61,6 +62,7 @@
                     android:textSize="20dp" />
 
                 <Spinner
+
                     android:id="@+id/spnUser"
                     android:layout_width="match_parent"
                     android:layout_height="41dp"
@@ -69,6 +71,7 @@
                     android:background="@drawable/blue_boder" />
 
                 <androidx.recyclerview.widget.RecyclerView
+
                     android:id="@+id/rcvTaskListAdmin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

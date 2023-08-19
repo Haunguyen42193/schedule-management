@@ -17,7 +17,7 @@ public class SignupActivity extends AppCompatActivity {
 
     ActivitySignupBinding binding;
     DBHelper dbHelper;
-    private int role =2;
+    private int role = 2;
 
     Button btnBack;
 

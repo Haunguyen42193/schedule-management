@@ -18,7 +18,7 @@
 
     <LinearLayout
 
-        android:layout_width="412dp"
+        android:layout_width="match_parent"
         android:layout_height="669dp"
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
@@ -62,13 +62,13 @@
             android:layout_marginRight="10sp"
             android:background="@drawable/border"
             android:ems="10"
-            android:padding="10dp"
+            android:padding="7dp"
             android:hint="Add your task title here"
             android:inputType="text" />
 
         <TextView
             android:fontFamily="@font/alata"
-            android:layout_width="400sp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"

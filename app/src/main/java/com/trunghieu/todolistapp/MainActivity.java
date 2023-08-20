@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         dbHelper = new DBHelper(this);
-        //dbHelper.insertUser(new User("m", "m@gmail.com", "123456", 2));
+        //dbHelper.insertUser(new User("q", "q@gmail.com", "123456", 1));
 //        dbHelper.insertTask(new Task("Do exercise", "done", "02/08/2023 06:00:00", "02/08/2023 06:30:00", 1, null));
 //        dbHelper.insertTask(new Task("Do exercise", "squad", "03/08/2023 06:30:00", null, 1, null));
 //        dbHelper.insertCategory(new Category("Work", "Some things to do in your work"));

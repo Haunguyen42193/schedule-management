@@ -119,7 +119,10 @@ public class AddTaskActivity extends AppCompatActivity {
         btnUserUploadAudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(AddTaskActivity.this, ReAddAudioActivity.class);
+                Intent intent = getIntent();
+                intent.putExtra("title", edtTitleAdd.getText().toString());
+                intent.putExtra("description", edtDesAdd.getText().toString());
+                intent.setClass(AddTaskActivity.this, ReAddAudioActivity.class);
                 startActivity(intent);
             }
         });
@@ -208,4 +211,5 @@ public class AddTaskActivity extends AppCompatActivity {
         if (insertState) return "Add successfully!!";
         else return "Add failed!!!";
     }
+
 }

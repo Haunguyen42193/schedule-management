@@ -2,6 +2,7 @@ package com.trunghieu.todolistapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.trunghieu.todolistapp.data.DBHelper;
+import com.trunghieu.todolistapp.model.Audio;
 import com.trunghieu.todolistapp.model.Category;
 import com.trunghieu.todolistapp.model.Task;
 import com.trunghieu.todolistapp.model.User;
@@ -31,16 +33,18 @@ public class ReAddTaskActivity extends AppCompatActivity {
     private EditText edtTitleReAdd;
     private EditText edtDesReAdd;
     private TextView txtStartReAdd;
-    private Spinner spnCateReAdd;
+    private Spinner spnCateReAdd, spnListAudio;
     private String[] items;
     private DBHelper dbHelper;
     private Calendar calendar;
-
-    private ArrayList<Task> arrayListTask;
+    private ArrayList<Audio> listAudio;
     private ArrayList<Category> listCate;
     private Category selectedCate;
+    private Audio selectedAudio;
     private Button btnReAddTaskDetail, btnUserUploadAudio;
     private User userLogin;
+    private Button btnBack;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,11 +57,22 @@ public class ReAddTaskActivity extends AppCompatActivity {
         txtStartReAdd = (TextView) findViewById(R.id.txtStartReAdd);
         spnCateReAdd = (Spinner) findViewById(R.id.spnCateReAdd);
         //btn upload audio
-        btnUserUploadAudio = (Button) findViewById(R.id.btn_UserUploadAudio);
+        btnUserUploadAudio = (Button) findViewById(R.id.btn_UserReUploadAudio);
         calendar = Calendar.getInstance();
         btnReAddTaskDetail = (Button) findViewById(R.id.btnReAddTaskDetail);
         SharedPreferences preferences = getSharedPreferences("session", MODE_PRIVATE);
         userLogin = dbHelper.getUserById(preferences.getInt("user-id", -1));
+        spnListAudio = (Spinner) findViewById(R.id.spnReAddListAudio);
+        listAudio = dbHelper.getAudioData();
+
+        btnBack = findViewById(R.id.btnBack9);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
 
         //Gán giá trị các thuộc tính từ trang detail cho các ô trong readd
         Intent intent = getIntent();
@@ -100,11 +115,28 @@ public class ReAddTaskActivity extends AppCompatActivity {
             spnCateReAdd.setSelection(position);
             setUpSpinnerCate();
         }
+        //hiển thị danh sách audio
+        if(!listAudio.isEmpty()){
+            items = new String[listAudio.size()];
+            int i = 0;
+            int position = 0;
+            for (Audio audio: listAudio) {
+                if(Objects.equals(audio.getId(), bundle.getString("re-add-task-audio")))
+                    position = i;
+                items[i++] = audio.getName();
+            }
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+            arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spnListAudio.setAdapter(arrayAdapter);
+            spnListAudio.setSelection(position);
+            setUpSpinnerAudio();
+        }
+
         //xu ly su kien click nut upload
         btnUserUploadAudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ReAddTaskActivity.this, AddAudioActivity.class);
+                Intent intent = new Intent(ReAddTaskActivity.this, ReAddAudioActivity.class);
                 startActivity(intent);
             }
         });
@@ -134,13 +166,28 @@ public class ReAddTaskActivity extends AppCompatActivity {
             }
         });
     }
+    //Thiết lập lấy giá trị audio do người dùng chọn
+    private void setUpSpinnerAudio () {
+        spnListAudio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selectedAudio = listAudio.get(position);
+            }
 
-        public String addTask() {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    public String addTask() {
         String title = edtTitleReAdd.getText().toString();
         String description = edtDesReAdd.getText().toString();
         String startDate = txtStartReAdd.getText().toString();
         int userId = userLogin.getId();
         String cateId = selectedCate.getId();
+        String audioId = selectedAudio.getId();
 
         boolean checkTitleExists = dbHelper.checkTitleExists(title);
         if (checkTitleExists){
@@ -168,7 +215,7 @@ public class ReAddTaskActivity extends AppCompatActivity {
         if (userId <= 0) {
             return "Something wrong!! Please login again.";
         }
-        boolean insertState = dbHelper.insertTask(new Task(title, description, startDate, null, userId, cateId));
+        boolean insertState = dbHelper.insertTask(new Task(title, description, startDate, null, userId, cateId, audioId));
 
       if (insertState) return "Add successfully!!";
 

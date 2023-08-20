@@ -213,27 +213,67 @@
 
         </LinearLayout>
 
-        <TextView
-            android:fontFamily="@font/alata"
-            android:id="@+id/textView18"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:padding="3sp"
-            android:shadowColor="@color/black"
-            android:text="Categories"
-            android:textColor="@color/black"
-            android:textSize="20dp" />
+            android:layout_height="88dp"
+            android:orientation="horizontal">
 
-        <Spinner
+            <LinearLayout
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            android:id="@+id/spnCateDetail"
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/border"
-            android:paddingLeft="5sp" />
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/alata"
+                    android:padding="3sp"
+                    android:shadowColor="@color/black"
+                    android:text="Categories"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <Spinner
+
+                    android:id="@+id/spnCateDetail"
+                    android:layout_width="170dp"
+                    android:layout_height="34dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/border"
+                    android:paddingLeft="5sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/alata"
+                    android:padding="3sp"
+                    android:shadowColor="@color/black"
+                    android:text="Audio"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <Spinner
+
+                    android:id="@+id/spnAudioDetail"
+                    android:layout_width="182dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/border"
+                    android:paddingLeft="5sp" />
+            </LinearLayout>
+        </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

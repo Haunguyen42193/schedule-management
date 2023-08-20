@@ -77,7 +77,9 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         if(btnTask.getId() == v.getId()) {
             Intent intent = new Intent(this, ListTaskActivity.class);
-
+            Bundle bundle = new Bundle();
+            bundle.putInt("user-id", userLogin.getId());
+            intent.putExtras(bundle);
             startActivity(intent);
         }
         if(btnUser.getId() == v.getId()) {

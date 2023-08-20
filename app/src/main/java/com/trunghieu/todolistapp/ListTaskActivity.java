@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.app.LauncherActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -38,12 +39,14 @@ public class ListTaskActivity extends AppCompatActivity {
     private FloatingActionButton btnAddTask;
     private ActivityResultLauncher<Intent> launcher;
     private Button btnBack;
+    private User userLogin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_task);
 
         //tìm các thành phần
+        dbHelper = new DBHelper(this);
         recyclerView = (RecyclerView) findViewById(R.id.rcvTaskListAdmin);
         adapter = new TaskAdapter(listTask, this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(ListTaskActivity.this);
@@ -53,6 +56,12 @@ public class ListTaskActivity extends AppCompatActivity {
         spnUser = findViewById(R.id.spnUser);
         btnAddTask = (FloatingActionButton) findViewById(R.id.btnAddTask);
         btnBack = findViewById(R.id.btnBack5);
+        SharedPreferences preferences = getSharedPreferences("session", MODE_PRIVATE);
+        userLogin = dbHelper.getUserById(preferences.getInt("user-id", -1));
+
+        Intent rc = getIntent();
+        Bundle bundle = rc.getExtras();
+        int a = bundle.getInt("user-id");
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,29 +70,36 @@ public class ListTaskActivity extends AppCompatActivity {
         });
 
         //lấy danh sách cần hiển thị
-        dbHelper = new DBHelper(this);
         listUser = dbHelper.getUserData();
 
         //kiểm tra danh sách có rỗng không
         if(!listUser.isEmpty()) {
             item = new String[listUser.size()];
             int i = 0;
+            int position = 0;
             for (User user : listUser) {
+                if(userLogin.getId() == user.getId())
+                    position = i;
                 item[i++] = "Name: " + user.getName() + " / Email: " + user.getEmail();
             }
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, item);
             arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spnUser.setAdapter(arrayAdapter);
+            spnUser.setSelection(position);
             setUpSpinner();
         }
 
         launcher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
-                Intent data = result.getData();
-                Bundle bundle = data.getExtras();
-                String status = bundle.getString("status");
-                if (status != null) {
-                    recreate();
+                listTask = dbHelper.getTaskData(userLogin.getEmail());
+                adapter.updateTaskList(listTask);
+                if(!listTask.isEmpty()) {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    txtNotic.setVisibility(View.GONE);
+                } else {
+                    txtNotic.setText("Không có lịch trình!!!!");
+                    recyclerView.setVisibility(View.GONE);
+                    txtNotic.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -91,12 +107,16 @@ public class ListTaskActivity extends AppCompatActivity {
         btnAddTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btnAddTask.getId() == v.getId()){
-                    Intent intent = new Intent(ListTaskActivity.this, AddTaskActivity.class);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(ListTaskActivity.this, AddTaskActivity.class);
+                launcher.launch(intent);
             }
         });
+//        launcher= registerForActivityResult( new ActivityResultContracts.StartActivityForResult(), result -> {
+//            if(result.getResultCode() == RESULT_OK){
+//                listTask = dbHelper.getTaskData(userLogin.getEmail());
+//                adapter.updateTaskList(listTask);
+//            }
+//        });
     }
 
     private void setUpSpinner() {
@@ -137,6 +157,7 @@ public class ListTaskActivity extends AppCompatActivity {
                 bundle.putString("task-title", task.getTitle());
                 bundle.putString("task-description", task.getDescription());
                 bundle.putString("task-start", task.getStartTime());
+                bundle.putString("task-audio-id", task.getAudioID());
                 if (task.getCompleted() != null) {
                     bundle.putString("task-complete", task.getCompleted());
                 } else {
@@ -153,7 +174,7 @@ public class ListTaskActivity extends AppCompatActivity {
                     bundle.putString("task-user", "Not found");
                 }
                 intent.putExtras(bundle);
-                startActivity(intent);
+                launcher.launch(intent);
             }
         });
     }

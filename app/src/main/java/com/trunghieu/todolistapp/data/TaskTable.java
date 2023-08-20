@@ -11,6 +11,7 @@ public class TaskTable {
     public static final String COLUMN_COMPLETE = "completed";
     public static final String COLUMN_USER = "userId";
     public static final  String COLUMN_CATEGORY ="categoryId";
+    public static final  String COLUMN_AUDIO ="audio_id";
     public static String CREATE_TABLE_TASK =
             "CREATE TABLE " + TABLE_TASKS + " ( "
             + COLUMN_ID + " TEXT PRIMARY KEY, "
@@ -20,8 +21,11 @@ public class TaskTable {
             + COLUMN_COMPLETE + " TEXT, "
             + COLUMN_USER + " INTEGER, "
             + COLUMN_CATEGORY + " TEXT, "
+            + COLUMN_AUDIO + " TEXT, "
             + "FOREIGN KEY (" + COLUMN_USER + ") REFERENCES "
             + TABLE_NAME + "(" + RoleTable.COLUMN_ID +"), "
+            + "FOREIGN KEY (" + COLUMN_AUDIO + ") REFERENCES "
+            + TABLE_NAME + "(" + AudioTable.COLUMN_ID +"), "
             + "FOREIGN KEY (" + COLUMN_CATEGORY + ") REFERENCES "
             + CategoryTable.TABLE_NAME + "(" + CategoryTable.COLUMN_ID +"))";
 

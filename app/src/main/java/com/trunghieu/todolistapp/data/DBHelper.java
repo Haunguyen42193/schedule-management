@@ -95,6 +95,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(TaskTable.COLUMN_COMPLETE, t.getCompleted());
         values.put(TaskTable.COLUMN_USER, t.getUserId());
         values.put(TaskTable.COLUMN_CATEGORY,t.getCategoryID());
+        values.put(TaskTable.COLUMN_AUDIO,t.getAudioID());
         long rs = db.insert(TaskTable.TABLE_TASKS, null, values);
         db.close();
         return rs != -1;
@@ -116,7 +117,8 @@ public class DBHelper extends SQLiteOpenHelper {
             String complete = cursor.getString(4);
             int userId = cursor.getInt(5);
             String categoryId = cursor.getString(6);
-            Task task = new Task(id, title, description, start, complete, userId, categoryId);
+            String audioID = cursor.getString(7);
+            Task task = new Task(id, title, description, start, complete, userId, categoryId, audioID);
             listTask.add(task);
         }
         db.close();
@@ -136,7 +138,8 @@ public class DBHelper extends SQLiteOpenHelper {
             String complete = cursor.getString(4);
             int userId = cursor.getInt(5);
             String categoryId = cursor.getString(6);
-            t = new Task(id, title, description, start, complete, userId, categoryId);
+            String audioID = cursor.getString(7);
+            t = new Task(id, title, description, start, complete, userId, categoryId, audioID);
         }
         db.close();
         return t;
@@ -161,7 +164,8 @@ public class DBHelper extends SQLiteOpenHelper {
             String complete = cursor.getString(4);
             int userId = cursor.getInt(5);
             String categoryId = cursor.getString(6);
-            Task task = new Task(id, title, description, start, complete, userId, categoryId);
+            String audioID = cursor.getString(7);
+            Task task = new Task(id, title, description, start, complete, userId, categoryId, audioID);
             list.add(task);
         }
         db.close();
@@ -178,6 +182,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(TaskTable.COLUMN_COMPLETE, t.getCompleted());
         values.put(TaskTable.COLUMN_USER, t.getUserId());
         values.put(TaskTable.COLUMN_CATEGORY, t.getCategoryID());
+        values.put(TaskTable.COLUMN_AUDIO, t.getAudioID());
         String whereClause = TaskTable.COLUMN_ID + " = ?";
         long rs = db.update(TaskTable.TABLE_TASKS,
                 values,

@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ReAddTaskActivity">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnBack9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="669dp"
@@ -118,6 +128,39 @@
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
+                <LinearLayout
+                    android:layout_width="183dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtVUploadAudio2"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/alata"
+                        android:padding="3sp"
+                        android:shadowColor="@color/black"
+                        android:text="List Audio"
+                        android:textColor="@color/black"
+                        android:textSize="20dp"
+                        tools:layout_editor_absoluteX="16dp"
+                        tools:layout_editor_absoluteY="15dp" />
+
+                    <Spinner
+                        android:id="@+id/spnReAddListAudio"
+                        android:layout_width="169dp"
+                        android:layout_height="45dp"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/border"
+                        android:fontFamily="@font/alata"
+                        android:padding="5dp"
+                        android:paddingLeft="5dp"
+                        tools:layout_editor_absoluteX="3dp"
+                        tools:layout_editor_absoluteY="49dp" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -126,12 +169,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:fontFamily="@font/alata"
                     android:id="@+id/textView18"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
+                    android:fontFamily="@font/alata"
                     android:padding="3sp"
                     android:shadowColor="@color/black"
                     android:text="Categories"
@@ -139,19 +182,50 @@
                     android:textSize="20dp" />
 
                 <Spinner
-                    android:fontFamily="@font/alata"
                     android:id="@+id/spnCateReAdd"
                     android:layout_width="185dp"
                     android:layout_height="38sp"
                     android:background="@drawable/border"
+                    android:fontFamily="@font/alata"
                     android:paddingLeft="5dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="183dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/alata"
+                            android:padding="3sp"
+                            android:shadowColor="@color/black"
+                            android:text="Upload Audio"
+                            android:textColor="@color/black"
+                            android:textSize="20dp" />
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btn_UserReUploadAudio"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/blue_boder"
+                            android:fontFamily="@font/alata"
+                            android:text="upload" />
+                    </LinearLayout>
+                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="186dp">
+            android:layout_height="99dp">
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnReAddTaskDetail"
@@ -162,9 +236,10 @@
                 android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.115" />
+                app:layout_constraintVertical_bias="0.49" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

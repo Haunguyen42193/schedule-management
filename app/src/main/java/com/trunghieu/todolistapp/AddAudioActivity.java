@@ -72,8 +72,8 @@ public class AddAudioActivity extends AppCompatActivity {
         boolean isInserted = dbHelper.insertAudio(audio);
         if (isInserted) {
             Toast.makeText(AddAudioActivity.this, "Âm thanh đã được thêm mới", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(AddAudioActivity.this, ListAudioActivity.class);
-            startActivity(intent);
+            Intent intent = getIntent();
+            setResult(Activity.RESULT_OK, intent);
             finish();
         } else {
             Toast.makeText(AddAudioActivity.this, "Có lỗi xảy ra khi thêm âm thanh", Toast.LENGTH_SHORT).show();

@@ -166,22 +166,15 @@ public class UserActivity extends AppCompatActivity{
         });
         launcher= registerForActivityResult( new ActivityResultContracts.StartActivityForResult(), result -> {
             if(result.getResultCode() == RESULT_OK){
-                Intent data = result.getData();
-                assert data != null;
-                Bundle bundle = data.getExtras();
-                String status = bundle.getString("status");
-                if(status != null) {
-                    recreate();
-                }
+                listTask = dbHelper.getTaskData(userLogin.getEmail());
+                taskUserAdapter.updateTaskList(listTask);
             }
         });
         fltUserAddTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(fltUserAddTaskButton.getId() == v.getId()){
-                    Intent intent = new Intent(UserActivity.this, AddTaskActivity.class);
-                    startActivity(intent);
-                }
+                Intent intent = new Intent(UserActivity.this, AddTaskActivity.class);
+                launcher.launch(intent);
             }
         });
         //user add category
@@ -190,7 +183,7 @@ public class UserActivity extends AppCompatActivity{
             public void onClick(View v) {
                 if(fltUserAddCateButton.getId() == v.getId()){
                     Intent intent = new Intent(UserActivity.this,UserAddCategoryActivity.class);
-                    startActivity(intent);
+                    launcher.launch(intent);
                 }
             }
         });
@@ -202,7 +195,7 @@ public class UserActivity extends AppCompatActivity{
                 Bundle bundle = new Bundle();
                 bundle.putString("user-mail", userLogin.getEmail());
                 intent.putExtras(bundle);
-                startActivity(intent);
+                launcher.launch(intent);
             }
         });
         btnHistory.setOnClickListener(new View.OnClickListener() {
@@ -212,7 +205,7 @@ public class UserActivity extends AppCompatActivity{
                 Bundle bundle = new Bundle();
                 bundle.putString("user-mail", userLogin.getEmail());
                 intent.putExtras(bundle);
-                startActivity(intent);
+                launcher.launch(intent);
             }
         });
         // Tạo kênh thông báo
@@ -370,6 +363,7 @@ public class UserActivity extends AppCompatActivity{
                 bundle.putString("task-title", task.getTitle());
                 bundle.putString("task-description", task.getDescription());
                 bundle.putString("task-start", task.getStartTime());
+                bundle.putString("task-audio-id", task.getAudioID());
                 if (task.getCompleted() != null) {
                     bundle.putString("task-complete", task.getCompleted());
                 } else {
@@ -386,7 +380,7 @@ public class UserActivity extends AppCompatActivity{
                     bundle.putString("task-user", "Not found");
                 }
                 intent.putExtras(bundle);
-                startActivity(intent);
+                launcher.launch(intent);
             }
 
             @Override

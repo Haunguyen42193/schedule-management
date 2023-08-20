@@ -16,7 +16,16 @@ public class Task {
     private int userId;
     private String categoryID;
 
-    public Task(String title, String description, String startTime, String completed, int userId, String categoryID) {
+    public void setAudioID(String audioID) {
+        this.audioID = audioID;
+    }
+    public String getAudioID() {
+        return audioID;
+    }
+
+    private String audioID;
+
+    public Task(String title, String description, String startTime, String completed, int userId, String categoryID, String audioID) {
         this.id = UUID.randomUUID().toString();
         this.title = title;
         this.description = description;
@@ -24,9 +33,10 @@ public class Task {
         this.completed = completed;
         this.userId = userId;
         this.categoryID = categoryID;
+        this.audioID = audioID;
     }
 
-    public Task(String id, String title, String description, String startTime, String completed, int userId, String categoryID) {
+    public Task(String id, String title, String description, String startTime, String completed, int userId, String categoryID, String audioID) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -34,6 +44,7 @@ public class Task {
         this.completed = completed;
         this.userId = userId;
         this.categoryID = categoryID;
+        this.audioID = audioID;
     }
 
     public String getId() {

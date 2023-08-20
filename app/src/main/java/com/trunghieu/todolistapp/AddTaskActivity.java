@@ -119,10 +119,7 @@ public class AddTaskActivity extends AppCompatActivity {
         btnUserUploadAudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = getIntent();
-                intent.putExtra("title", edtTitleAdd.getText().toString());
-                intent.putExtra("description", edtDesAdd.getText().toString());
-                intent.setClass(AddTaskActivity.this, ReAddAudioActivity.class);
+                Intent intent = new Intent(AddTaskActivity.this, AddAudioActivity.class);
                 startActivity(intent);
             }
         });
@@ -132,9 +129,6 @@ public class AddTaskActivity extends AppCompatActivity {
                 String status = addTask();
                 Toast.makeText(AddTaskActivity.this, status, Toast.LENGTH_LONG).show();
                 Intent intent = getIntent();
-                Bundle bundle = new Bundle();
-                bundle.putString("status",status);
-                intent.putExtras(bundle);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             }
@@ -178,6 +172,7 @@ public class AddTaskActivity extends AppCompatActivity {
         String title = edtTitleAdd.getText().toString();
         String description = edtDesAdd.getText().toString();
         String startDate = txtStartAdd.getText().toString();
+        String selectedAudioID = selectedAudio.getId();
         int userId =
                 userLogin.getId();
         String cateId = selectedCate.getId();
@@ -206,10 +201,9 @@ public class AddTaskActivity extends AppCompatActivity {
         if (userId <= 0) {
             return "Something wrong!! Please login again.";
         }
-        boolean insertState = dbHelper.insertTask(new Task(title, description, startDate, null, userId, cateId));
+        boolean insertState = dbHelper.insertTask(new Task(title, description, startDate, null, userId, cateId, selectedAudioID));
 
         if (insertState) return "Add successfully!!";
         else return "Add failed!!!";
     }
-
 }

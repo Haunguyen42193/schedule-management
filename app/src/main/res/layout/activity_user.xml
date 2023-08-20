@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="To do"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="24dp"
         app:layout_constraintBottom_toTopOf="@+id/hzsvCate"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,7 +48,6 @@
         android:layout_height="41dp"
         android:layout_marginTop="56dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.235"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cldMain">
 
@@ -91,12 +90,12 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvItemTaskUser"
-        android:layout_width="354dp"
-        android:layout_height="161dp"
-        android:layout_marginBottom="44dp"
+        android:layout_width="340dp"
+        android:layout_height="165dp"
+        android:layout_marginBottom="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.135"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView

@@ -312,6 +312,29 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return listAudio;
     }
+    public String getAudioByTaskID(String taskID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String audioFilePath = null;
+        Cursor cursor = db.query(
+                TaskTable.TABLE_TASKS,
+                null,
+                TaskTable.COLUMN_ID + " = ?",
+                new String[]{taskID},
+                null,
+                null,
+                null
+        );
+        if (cursor != null && cursor.moveToFirst()) {
+            int filePath = cursor.getColumnIndex(AudioTable.COLUMN_FILE_PATH);
+
+            if (filePath >= 0) {
+                audioFilePath = cursor.getString(filePath);
+            }
+            cursor.close();
+        }
+
+        return audioFilePath;
+    }
     public Audio getAudioByID(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Audio audio = null;

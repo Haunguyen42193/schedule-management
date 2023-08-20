@@ -49,7 +49,7 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioViewHol
             public void onClick(View v) {
                 Cursor cursor = database.query(
                         AudioTable.TABLE_NAME,
-                        new String[]{AudioTable.COLUMN_ID, AudioTable.COLUMN_NAME, AudioTable.COLUMN_FILE_PATH},
+                        new String[]{AudioTable.COLUMN_ID, AudioTable.COLUMN_NAME, AudioTable.COLUMN_FILE_PATH, AudioTable.COLUMN_TASK_ID},
                         AudioTable.COLUMN_ID + " = ?",
                         new String[]{audio.getId()},
                         null,
@@ -60,17 +60,18 @@ public class AudioAdapter extends RecyclerView.Adapter<AudioAdapter.AudioViewHol
                     int idIndex = cursor.getColumnIndex(AudioTable.COLUMN_ID);
                     int nameIndex = cursor.getColumnIndex(AudioTable.COLUMN_NAME);
                     int fileIndex = cursor.getColumnIndex(AudioTable.COLUMN_FILE_PATH);
-                    if(idIndex !=-1 && nameIndex!=-1 && fileIndex !=-1){
+                    int taskIdIndex = cursor.getColumnIndex(AudioTable.COLUMN_TASK_ID);
+                    if(idIndex !=-1 && nameIndex!=-1 && fileIndex !=-1 && taskIdIndex !=-1){
                         String id = cursor.getString(idIndex);
                         String name = cursor.getString(nameIndex);
                         String filePath = cursor.getString(fileIndex);
-
+                        String taskId = cursor.getString(taskIdIndex);
                         Intent intent = new Intent(context, DetailAudioActivity.class);
 
                         intent.putExtra("id", id);
                         intent.putExtra("name", name);
                         intent.putExtra("filePath", filePath);
-
+                        intent.putExtra("taskId", taskId);
                         context.startActivity(intent);
                         cursor.close();
                     }

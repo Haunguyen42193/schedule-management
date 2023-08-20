@@ -8,12 +8,18 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -32,10 +38,13 @@ import com.trunghieu.todolistapp.model.Category;
 import com.trunghieu.todolistapp.model.Task;
 import com.trunghieu.todolistapp.model.User;
 
+import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class UserActivity extends AppCompatActivity{
     private CalendarView cldMain;
@@ -206,6 +215,40 @@ public class UserActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+        // Tạo kênh thông báo
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("channel_id", "Channel Name", NotificationManager.IMPORTANCE_HIGH);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        //PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
+
+
+        String triggerTime = Utils.sdf.format(SystemClock.elapsedRealtime()); // Thời gian tính theo miliseconds
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+
+        try {
+            Date date = dateFormat.parse(triggerTime);
+            ArrayList<Task> taskList = dbHelper.getTaskData(userLogin.getEmail());
+            for (Task task : taskList) {
+                Date taskDate = Utils.sdf.parse(task.getStartTime());
+                long taskDateTrue = taskDate.getTime();
+                long timestamp = date.getTime();
+                if (timestamp == taskDateTrue)
+                {
+                    alarmManager.setExact(AlarmManager.ELAPSED_REALTIME_WAKEUP, timestamp, pendingIntent);
+                    NotificationAudio();
+                }
+            }
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     }
     public void newButtonCate() {
         //Tạo các button là các category
@@ -370,15 +413,34 @@ public class UserActivity extends AppCompatActivity{
             }
         });
     }
-    private void checkTaskDeadline(Audio audio) throws ParseException {
-        // Kiểm tra thời gian đến hạn của task
-        long taskDeadline = Utils.sdf.parse(task.getStartTime()).getTime()/1000;
-        if (taskDeadline <= System.currentTimeMillis()) {
-            // Tạo đối tượng Audio đại diện cho âm thanh thông báo
-            //Intent intent = new Intent(this, NotificationReceiver.class);
-            //intent.putExtra("audio_name", audio.getName());
 
-            // Gọi phương thức scheduleAlarmForTask() trong AudioNotificationHelper
+    public void NotificationAudio () throws ParseException {
+        // Lấy ngày hiện tại
+        Calendar calendar = Calendar.getInstance();
+        Date currentDate = calendar.getTime();
+
+    // Lấy danh sách các task
+        ArrayList<Task> taskList = dbHelper.getTaskData(userLogin.getEmail());
+        for (Task task : taskList) {
+            String taskDate = task.getStartTime(); // Lấy ngày hạn của task từ đối tượng Task
+
+            // Kiểm tra nếu taskDate đến hạn và có đường dẫn âm thanh
+            if (currentDate.after(Utils.sdf.parse(taskDate))) {
+                String audioFilePath = dbHelper.getAudioByTaskID(task.getId()); // Lấy đường dẫn âm thanh từ ID của task
+
+                // Sử dụng đường dẫn âm thanh để phát âm thanh hoặc thực hiện các xử lý khác
+                if (audioFilePath != null) {
+                    // Phát âm thanh từ đường dẫn
+                    MediaPlayer mediaPlayer = new MediaPlayer();
+                    try {
+                        mediaPlayer.setDataSource(audioFilePath);
+                        mediaPlayer.prepare();
+                        mediaPlayer.start();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
     }
 

@@ -1,9 +1,14 @@
 package com.trunghieu.todolistapp;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,14 +31,17 @@ import com.google.android.gms.safetynet.SafetyNet;
 import com.google.android.gms.safetynet.SafetyNetApi;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.trunghieu.todolistapp.broadcast.AlarmReceiver;
 
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 //***********LỚP SỬ DỤNG CÁC HÀM CÓ THỂ DÙNG NHIỀU LẦN**********
 public class Utils {
@@ -70,5 +78,25 @@ public class Utils {
     private static void updateText(TextView txt, Calendar calendar) {
         String formatDate = sdf.format(calendar.getTime());
         txt.setText(formatDate);
+    }
+
+    public static void setAlarm(@NonNull Context context, long triggerAtMillis, String path) {
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        intent.putExtra("path", path);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+
+        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + triggerAtMillis, pendingIntent);
+    }
+    public static long calculateDaysBetweenDates(Date startDate, Date endDate) {
+        Calendar calendarStart = Calendar.getInstance();
+        calendarStart.setTime(startDate);
+
+        Calendar calendarEnd = Calendar.getInstance();
+        calendarEnd.setTime(endDate);
+
+        long diffInMillis = calendarEnd.getTimeInMillis() - calendarStart.getTimeInMillis();
+        return diffInMillis;
     }
 }

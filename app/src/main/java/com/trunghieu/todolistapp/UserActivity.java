@@ -159,6 +159,14 @@ public class UserActivity extends AppCompatActivity{
             if(result.getResultCode() == RESULT_OK){
                 listTask = dbHelper.getTaskData(userLogin.getEmail());
                 taskUserAdapter.updateTaskList(listTask);
+                if(!listTask.isEmpty()) {
+                    rvItemTaskUser.setVisibility(View.VISIBLE);
+                    txtNoticeUser.setVisibility(View.GONE);
+                } else {
+                    txtNoticeUser.setText("No task to do");
+                    rvItemTaskUser.setVisibility(View.GONE);
+                    txtNoticeUser.setVisibility(View.VISIBLE);
+                }
             }
         });
         fltUserAddTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -199,6 +207,19 @@ public class UserActivity extends AppCompatActivity{
                 launcher.launch(intent);
             }
         });
+        Calendar calendarStart = Calendar.getInstance();
+
+        for (Task task1: listTask) {
+            try {
+                Date date = Utils.sdf.parse(task1.getStartTime());
+                long time = Utils.calculateDaysBetweenDates(calendarStart.getTime(), date);
+                Audio a = dbHelper.getAudioByID(task1.getAudioID());
+                if (time > 0)
+                    Utils.setAlarm(this, time, a.getAudioFilePath());
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
     public void newButtonCate() {
         //Tạo các button là các category

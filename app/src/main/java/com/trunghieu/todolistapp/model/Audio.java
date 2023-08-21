@@ -21,14 +21,12 @@ public class Audio implements Serializable {
         this.name = name;
         this.audioFilePath  = audioData;
     }
-
     public Audio(String name, String audioFilePath) {
         this.id = "AUDIO"+UUID.randomUUID().toString();
         this.name = name;
         this.audioFilePath = audioFilePath;
 //        this.taskId = taskId;
     }
-
     public String getId() {
         return id;
     }

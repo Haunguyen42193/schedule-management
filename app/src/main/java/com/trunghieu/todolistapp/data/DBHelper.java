@@ -33,6 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(NotificationTable.CREATE_TABLE_NOTIFICATION);
         db.execSQL(AudioTable.CREATE_QUERY);
         insertRoles(db);
+        initData(db);
         isDatabaseCreated = true;
     }
     @Override
@@ -51,7 +52,6 @@ public class DBHelper extends SQLiteOpenHelper {
             values.put(RoleTable.COLUMN_ID, 1);
             values.put(RoleTable.COLUMN_NAME, "Admin");
             db.insert(RoleTable.TABLE_NAME, null, values);
-
             values.clear();
             values.put(RoleTable.COLUMN_ID, 2);
             values.put(RoleTable.COLUMN_NAME, "User");
@@ -192,7 +192,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return rs > 0;
     }
-
     public boolean deleteTask(String id) {
         SQLiteDatabase db = getWritableDatabase();
         long rs = 0;
@@ -202,7 +201,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return rs > 0;
     }
-
     public boolean insertCategory(Category t) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -370,9 +368,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return rowsAffected > 0;
     }
-
-
-
     public boolean checkEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + UserTable.TABLE_NAME + " WHERE " + UserTable.COLUMN_EMAIL + " = ?";
@@ -552,7 +547,51 @@ public class DBHelper extends SQLiteOpenHelper {
             }
             db.close();
         }
-
         return exists;
     }
+    public void insertUser(SQLiteDatabase db, User user) {
+        ContentValues values = new ContentValues();
+        values.put(UserTable.COLUMN_NAME, user.getName());
+        values.put(UserTable.COLUMN_EMAIL, user.getEmail());
+        values.put(UserTable.COLUMN_PASSWORD, user.getPassword());
+        values.put(UserTable.COLUMN_ROLE, user.getRole());
+        db.insert(UserTable.TABLE_NAME, null, values);
+
+
+    }
+    public void insertCategory(SQLiteDatabase db, Category t) {
+        ContentValues values = new ContentValues();
+        values.put(CategoryTable.COLUMN_ID, t.getId());
+        values.put(CategoryTable.COLUMN_NAME, t.getName());
+        values.put(CategoryTable.COLUMN_DESCRIPTION, t.getdescription());
+        db.insert(CategoryTable.TABLE_NAME, null, values);
+
+
+    }
+    public void insertAudio(SQLiteDatabase db, Audio t) {
+
+        ContentValues values= new ContentValues();
+        values.put(AudioTable.COLUMN_ID, t.getId());
+        values.put(AudioTable.COLUMN_NAME, t.getName());
+        values.put(AudioTable.COLUMN_FILE_PATH, t.getAudioFilePath());
+         db.insert(AudioTable.TABLE_NAME, null, values);
+
+
+    }
+    private void initData(SQLiteDatabase db) {
+        if (!isDatabaseCreated) {
+            insertUser(db, new User("Hieu", "hieu@gmail.com", "123456", 1)); // Sử dụng tham số db để chèn dữ liệu user
+            insertUser(db, new User("Hau", "hau@gmail.com", "123456", 1));
+            insertUser(db, new User("Quan", "quan@gmail.com", "123456", 1));
+            insertCategory(db, new Category("Work", "Some things to do in your work"));
+            insertCategory(db, new Category("Study", "Some things to do like exercise"));
+            insertCategory(db, new Category("Play", "Some things to play like video game"));
+            insertCategory(db, new Category("Eating", "Some things to do"));
+            insertCategory(db, new Category("Sleep", "Some things to "));
+            insertAudio(db, new Audio("Music","/res/raw/audio.mp3"));
+            insertAudio(db, new Audio("Defaul","/res/raw/audiodefaul.mp3"));
+        }
+    }
+
+
 }

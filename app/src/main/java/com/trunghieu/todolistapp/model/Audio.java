@@ -14,20 +14,19 @@ public class Audio implements Serializable {
     private String name;
     private String audioFilePath ;
 
-    private String taskId;
+    //private String taskId;
 
     public Audio(String id, String name, String audioData) {
         this.id = id;
         this.name = name;
         this.audioFilePath  = audioData;
-        //this.taskId = taskId;
     }
 
     public Audio(String name, String audioFilePath) {
         this.id = "AUDIO"+UUID.randomUUID().toString();
         this.name = name;
         this.audioFilePath = audioFilePath;
-        //this.taskId = taskId;
+//        this.taskId = taskId;
     }
 
     public String getId() {
@@ -53,10 +52,10 @@ public class Audio implements Serializable {
     public void setAudioFilePath(String audioFilePath) {
         this.audioFilePath  = audioFilePath;
     }
-    public String getTaskId() {
-        return taskId;
-    }
-    public void setTaskId(String taskId) {this.taskId = taskId;}
+//    public String getTaskId() {
+//        return taskId;
+//    }
+//    public void setTaskId(String taskId) {this.taskId = taskId;}
     private String generateRandomNumber() {
         Random random = new Random();
         int randomNumber = random.nextInt(9000) + 1000; // Tạo số ngẫu nhiên từ 1000 đến 9999

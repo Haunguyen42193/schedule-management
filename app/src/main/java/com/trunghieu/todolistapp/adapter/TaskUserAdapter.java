@@ -70,7 +70,10 @@ public class TaskUserAdapter extends RecyclerView.Adapter<TaskUserAdapter.ViewHo
         if (task.getCompleted() != null) {
             holder.cbIsCompleteTaskUser.setChecked(true);
             holder.cbIsCompleteTaskUser.setEnabled(false);
-        }else holder.cbIsCompleteTaskUser.setChecked(false);
+        }else {
+            holder.cbIsCompleteTaskUser.setChecked(false);
+            holder.cbIsCompleteTaskUser.setEnabled(true);
+        }
         holder.cbIsCompleteTaskUser.setOnClickListener( view -> {
             if (clickListener != null) {
                 clickListener.onCheckBoxClick(task, holder.cbIsCompleteTaskUser);

@@ -36,8 +36,7 @@ public class AddCategoryActivity extends AppCompatActivity {
                 if (isInserted) {
 
                     Toast.makeText(AddCategoryActivity.this, "Danh mục đã được thêm mới", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(AddCategoryActivity.this, ListCategoryActivity.class);
-                    startActivity(intent);
+
                     finish();
                 } else {
 

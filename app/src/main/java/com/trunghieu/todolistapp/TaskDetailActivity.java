@@ -276,7 +276,7 @@ public class TaskDetailActivity extends AppCompatActivity implements View.OnClic
         if (!Objects.isNull(t)) {
             if (t.getTitle().equals(title) && t.getDescription().equals(description)
                     && t.getStartTime().equals(startDate) && Objects.equals(t.getCompleted(), complete)
-                    && Objects.equals(t.getAudioID(), audioId))
+                    && Objects.equals(t.getAudioID(), audioId) && Objects.equals(t.getCategoryID(), cateId))
                 return "No thing to update";
             else {
                 if (dbHelper.updateTask(new Task(id, title, description, startDate, complete, userId, cateId, audioId)))

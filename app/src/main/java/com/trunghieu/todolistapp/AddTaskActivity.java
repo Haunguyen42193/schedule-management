@@ -28,6 +28,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 public class AddTaskActivity extends AppCompatActivity {
     private EditText edtTitleAdd;
@@ -128,9 +129,11 @@ public class AddTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String status = addTask();
                 Toast.makeText(AddTaskActivity.this, status, Toast.LENGTH_LONG).show();
-                Intent intent = getIntent();
-                setResult(Activity.RESULT_OK, intent);
-                finish();
+                if(Objects.equals(status, "Add successfully!!")) {
+                    Intent intent = getIntent();
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                }
             }
         });
     }

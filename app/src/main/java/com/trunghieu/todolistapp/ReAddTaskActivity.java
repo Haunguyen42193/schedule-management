@@ -136,7 +136,7 @@ public class ReAddTaskActivity extends AppCompatActivity {
         btnUserUploadAudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ReAddTaskActivity.this, ReAddAudioActivity.class);
+                Intent intent = new Intent(ReAddTaskActivity.this, AddAudioActivity.class);
                 startActivity(intent);
             }
         });
@@ -146,9 +146,11 @@ public class ReAddTaskActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String status = addTask();
                 Toast.makeText(ReAddTaskActivity.this, status, Toast.LENGTH_LONG).show();
-                Intent intent = getIntent();
-                setResult(Activity.RESULT_OK, intent);
-                finish();
+                if(Objects.equals(status, "Add successfully!!")) {
+                    Intent intent = getIntent();
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                }
             }
         });
     }

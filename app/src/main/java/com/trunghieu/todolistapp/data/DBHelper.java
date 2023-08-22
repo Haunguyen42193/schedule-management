@@ -589,7 +589,7 @@ public class DBHelper extends SQLiteOpenHelper {
             insertCategory(db, new Category("Eating", "Some things to do"));
             insertCategory(db, new Category("Sleep", "Some things to "));
             insertAudio(db, new Audio("Music","/res/raw/audio.mp3"));
-            insertAudio(db, new Audio("Defaul","/res/raw/audiodefaul.mp3"));
+            insertAudio(db, new Audio("Default","/res/raw/audiodefaul.mp3"));
         }
     }
 

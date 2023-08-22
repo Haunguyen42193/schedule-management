@@ -214,8 +214,10 @@ public class UserActivity extends AppCompatActivity{
                 Date date = Utils.sdf.parse(task1.getStartTime());
                 long time = Utils.calculateDaysBetweenDates(calendarStart.getTime(), date);
                 Audio a = dbHelper.getAudioByID(task1.getAudioID());
-                if (time > 0)
-                    Utils.setAlarm(this, time, a.getAudioFilePath());
+                if (time > 0) {
+                    Alarm alarm = new Alarm(this, time, a.getAudioFilePath());
+                    alarm.setAlarm();
+                }
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }

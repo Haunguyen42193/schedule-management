@@ -50,8 +50,6 @@ public class AddUserActivity extends AppCompatActivity {
                             // Nếu thêm thành công, hiển thị thông báo và quay lại ListUserActivity
                             Toast.makeText(AddUserActivity.this, "Người dùng đã được thêm mới", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(AddUserActivity.this, ListUserActivity.class);
-                            startActivity(intent);
                             finish();
                         } else {
                             // Nếu thêm không thành công, hiển thị thông báo lỗi

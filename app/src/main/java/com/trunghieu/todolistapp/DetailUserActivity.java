@@ -5,12 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.trunghieu.todolistapp.data.DBHelper;
+import com.trunghieu.todolistapp.model.Task;
 import com.trunghieu.todolistapp.model.User;
+
+import java.util.ArrayList;
 
 public class DetailUserActivity extends AppCompatActivity {
         EditText edtName, edtEmail, edtPass, edtRole;
@@ -92,6 +96,12 @@ public class DetailUserActivity extends AppCompatActivity {
         public void onDeleteClicked(View view) {
             // Lấy email của người dùng hiện tại
             String email = edtEmail.getText().toString();
+            ArrayList<Task> listTask = dbHelper.getTaskData(edtEmail.getText().toString());
+            if (listTask != null) {
+                for (Task t: listTask) {
+                    dbHelper.deleteTask(t.getId());
+                }
+            }
 
             // Xóa người dùng từ cơ sở dữ liệu
             boolean isDeleted = dbHelper.deleteUserByEmail(email);

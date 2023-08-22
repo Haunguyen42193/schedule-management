@@ -80,15 +80,6 @@ public class Utils {
         txt.setText(formatDate);
     }
 
-    public static void setAlarm(@NonNull Context context, long triggerAtMillis, String path) {
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
-        Intent intent = new Intent(context, AlarmReceiver.class);
-        intent.putExtra("path", path);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-
-        alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + triggerAtMillis, pendingIntent);
-    }
     public static long calculateDaysBetweenDates(Date startDate, Date endDate) {
         Calendar calendarStart = Calendar.getInstance();
         calendarStart.setTime(startDate);

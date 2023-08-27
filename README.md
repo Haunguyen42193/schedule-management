@@ -72,83 +72,96 @@ Audio(AudioId, name, filePath, #taskId)
 - Chức năng của người dùng trong ứng dụng tập trung vào việc tạo, quản lý và theo dõi lịch trình cá nhân một cách hiệu quả, bao gồm cả việc tạo danh mục, kiểm soát trùng lặp, sử dụng thông báo âm thanh và thống kê lịch trình theo ngày, giờ để đảm bảo sắp xếp thời gian một cách hợp lý.
 
 5.	Giao diện
-   
-Hình 4.1: Giao diện khi start app
-
+* Giao diện khi start app
 ![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/60ec19c2-208d-4e8a-9284-03a84357206f)
- 
-Hình 4.2: Giao diện đăng ký
 
-![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/a9ebc480-8268-4085-a249-7b51ff247b76)
+* Giao diện đăng ký
  
-Hình 4.3: Giao diện đăng nhâp
+![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/a9ebc480-8268-4085-a249-7b51ff247b76)
+
+* Giao diện đăng nhâp
 
 ![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/89b1b4f8-c522-48e3-be25-f6824dccd60f)
-
-Hình 4.4: Giao diện Admin
+ 
+* Giao diện Admin
 
 ![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/6ef6a7a2-23cc-4894-90fe-53e7abbefb2a)
 
-Hình 4.5 Giao diện quản lý user
+* Giao diện quản lý user
 
 ![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/2b90ca42-64de-4013-b2e8-94f0426dd074)
 
-Hình 4.6 Giao diện add user
+* Giao diện add user
 
 ![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/1d0dde9f-4826-4c8a-abbf-2ae866cc32a4)
 
-Hình 4.7 Giao diện Infomation User
+* Giao diện Infomation User
 
 ![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/b0038d82-6b89-4e31-be16-33c5c3cb17b2)
 
-Hình 4.8 Giao diện Quản lý Task
+* Giao diện Quản lý Task
 
 ![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/9f33165a-094d-4866-8f33-f9a2d5e1c871)
 
-Hình 4.9 Giao diện Add Task
+* Giao diện Add Task
 
 ![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/37c40a5f-14e3-4738-b16d-7a134b5dbab8)
 
-Hình 4.10 Giao diện Task Detail
+* Giao diện Task Detail
 
 ![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/f792f239-9fa2-4bc3-85ec-168403001437)
 
-Hình 4.11 Giao diện quản lý Category
+* Giao diện quản lý Category
 
 ![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/4c8d52c8-9829-4f78-ae5b-776f1e04c60e)
 
-Hình 4.12 Giao diện Category Information
+* Giao diện Category Information
 
 ![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/a2f4b01e-442d-4df0-839a-66999e9f0048)
 
-Hình 4.13 Giao diện Add Category
+* Giao diện Add Category
 
 ![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/35214ff0-26dd-4de8-84b4-48649c35e35e)
 
-Hình 4.14 Giao diện quản lý Audio
- 
-Hình 4.15  Giao diện Audio Infomation
+* Giao diện quản lý Audio
 
- 
-Hình 4.16 Giao diện Add Audio
- 
-Hình 4.17 Giao diện chính dành cho User
+![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/21ec8a44-0c90-43b6-8b36-cec7514127ed)
 
+* Giao diện Audio Infomation
 
+![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/2ad5e9e3-fc0f-4f5e-86e1-c413c362d99c)
  
-Hình 4.18 Giao diện Add Task
+* Giao diện Add Audio
 
- 
-Hình 4.19 Giao diện History
- 
-Hình 4.20 Giao diện Detail Task
- 
-Hình 4.21 Giao diện List Category
+![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/6b1cdb10-4d4e-4f41-bef4-1f3804543bb9)
 
+* Giao diện chính dành cho User
+
+![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/23679dc9-649e-4519-85c8-6a0c7ba219ec)
  
-Hình 4.22 Giao diện Detail Category
- 
-Hình 4.23 Giao diện Add Category
+* Giao diện Add Task
+
+![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/383f4788-1cb6-4392-a55f-e341475160cf)
+
+* Giao diện History
+
+![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/54e30216-1a04-47cf-809e-1fe495e9e574)
+
+* Giao diện Detail Task
+
+![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/edab1d91-3d5f-4737-89af-51ea8087b84b)
+
+* Giao diện List Category
+
+![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/0e212a6a-d6e2-4fed-9699-cc89ebc677d9)
+
+* Giao diện Detail Category
+
+![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/dfb2285c-7f23-4d08-bcf3-36da8871db00)
+
+* Giao diện Add Category
+
+![image](https://github.com/Haunguyen42193/schedule-management/assets/92702518/05ad8c8a-853b-4937-8a04-3d35d89c96c5)
  
 KẾT LUẬN
 1.	Kết quả đạt được
